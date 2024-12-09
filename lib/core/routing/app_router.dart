@@ -23,22 +23,22 @@ class AppRouter {
     switch (settings.name) {
       case Routes.splashScreen:
         return MaterialPageRoute(
-          builder: (_) => SplashScreen(),
+          builder: (_) => const SplashScreen(),
         );
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
-          builder: (_) => LoginScreen(),
+          builder: (_) => const LoginScreen(),
         );
       case Routes.loginScreen:
-        return MaterialPageRoute(builder: (_) => LoginScreen());
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.signUpScreen:
-        return MaterialPageRoute(builder: (_) => SignUpScreen());
+        return MaterialPageRoute(builder: (_) => const SignUpScreen());
       case Routes.forgotPasswordScreen:
-        return MaterialPageRoute(builder: (_) => ForgotPasswordScreen());
+        return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
       case Routes.newPasswordScreen:
-        return MaterialPageRoute(builder: (_) => NewPasswordScreen());
+        return MaterialPageRoute(builder: (_) => const NewPasswordScreen());
       case Routes.verifyScreen:
-        return MaterialPageRoute(builder: (_) => VerifyScreen());
+        return MaterialPageRoute(builder: (_) => const VerifyScreen());
       default:
         return null;
     }
