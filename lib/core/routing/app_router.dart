@@ -6,7 +6,7 @@ import '../../features/forgot_password/ui/forgot_password_screen.dart';
 import '../../features/forgot_password/ui/new_password_screen.dart';
 import '../../features/forgot_password/ui/verify_screen.dart';
 import '../../features/login/ui/login_screen.dart';
-import '../../features/sign_up/ui/sign_up_Screen.dart';
+import '../../features/sign_up/ui/sign_up_screen.dart';
 import '../../features/splash/ui/splash_screen.dart';
 
 class AppRouter {

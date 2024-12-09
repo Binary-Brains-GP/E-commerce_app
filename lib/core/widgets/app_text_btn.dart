@@ -38,7 +38,7 @@ class AppTextBtn extends StatelessWidget {
           ),
         ),
         backgroundColor:
-        WidgetStatePropertyAll(backGroundColor ?? MyColors.mainPurple),
+        WidgetStatePropertyAll(backGroundColor ?? MyColors.myBlack),
         padding: WidgetStateProperty.all<EdgeInsets>(
           EdgeInsets.symmetric(
               horizontal: horizontalPadding ?? 12.w,
