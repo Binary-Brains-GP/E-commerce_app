@@ -5,19 +5,24 @@ class AppTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final TextInputType? keyboardType;
-  final bool errorAccurance;
+  final bool errorOccurance;
   final String? Function(String?)? validator;
 
   final bool
       usePrefixIcon; //------------if true, pass the icon to the prefixIcon var---------
   final IconData? prefixIcon;
+
+  //-------------------suffixIconsproperties
+  final bool useSuffixIcon;
+  final IconData? suffixIcon;
+  final Function()? onSuffixIconPressed;
 //--------------------------------------Password properties--------------------------------------------------
   final bool
       isSecuredField; //--------is this field a secure field or not???-------------
   final IconData? suffixIconVisible;
   final IconData? suffixIconHidden;
   final bool? obscureText;
-  final Function()? onSuffixIconPressed;
+  final Function()? onLockIconPressed;
   //---------------------Constants-----------------------
   final Color prefixIconColor;
   final Color suffixIconColor;
@@ -30,12 +35,15 @@ class AppTextField extends StatelessWidget {
 
   const AppTextField({
     super.key,
-    required this.errorAccurance,
+    required this.errorOccurance,
     required this.controller,
     required this.hintText,
     required this.isSecuredField,
     required this.usePrefixIcon,
     required this.validator,
+    required this.useSuffixIcon,
+    this.onLockIconPressed,
+    this.suffixIcon,
     this.keyboardType,
     this.prefixIcon,
     this.obscureText,
@@ -60,13 +68,12 @@ class AppTextField extends StatelessWidget {
         borderRadius: borderRadius,
         border: Border.all(
           width: 1.w,
-          color: errorAccurance
+          color: errorOccurance
               ? Colors.red
               : const Color.fromARGB(255, 211, 211, 211),
         ),
       ),
       child: TextFormField(
-        
         validator: validator,
         keyboardType: keyboardType,
         controller: controller,
@@ -83,13 +90,21 @@ class AppTextField extends StatelessWidget {
           contentPadding: EdgeInsets.all(contentPadding),
           suffixIcon: isSecuredField
               ? IconButton(
-                  onPressed: onSuffixIconPressed,
+                  onPressed: onLockIconPressed,
                   icon: Icon(
                     obscureText! ? suffixIconHidden : suffixIconVisible,
                     color: suffixIconColor,
                   ),
                 )
-              : null,
+              : useSuffixIcon
+                  ? IconButton(
+                      onPressed: onSuffixIconPressed,
+                      icon: Icon(
+                        suffixIcon,
+                        color: suffixIconColor,
+                      ),
+                    )
+                  : null,
         ),
       ),
     );
