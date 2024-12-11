@@ -6,7 +6,7 @@ import 'package:mobileproject/core/helpers/providers/auth_provider.dart';
 import 'package:mobileproject/core/theming/styles.dart';
 import 'package:mobileproject/core/widgets/app_text_btn.dart';
 import 'package:mobileproject/core/widgets/app_text_field.dart';
-import 'package:mobileproject/features/home/ui/home_screen.dart';
+import 'package:mobileproject/features/home/ui/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginForm extends ConsumerStatefulWidget {
@@ -68,7 +68,10 @@ class _LoginFormState extends ConsumerState<LoginForm> {
         authError = false;
       });
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen()));
+        MaterialPageRoute(
+          builder: (context) => const MainScreen(),
+        ),
+      );
       final prefs = await SharedPreferences.getInstance();
       prefs.setBool('showHome', true);
     } on FirebaseAuthException catch (error) {
@@ -111,11 +114,12 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             height: 3.h,
           ),
           AppTextField(
+            useSuffixIcon: false,
             controller: _emailController,
             hintText: "Enter your email address",
             usePrefixIcon: false,
             isSecuredField: false,
-            errorAccurance: authError,
+            errorOccurance: authError,
             keyboardType: TextInputType.emailAddress,
             validator: (val) {
               if (val == "") {
@@ -135,19 +139,20 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             height: 3.h,
           ),
           AppTextField(
+            useSuffixIcon: false,
             controller: _passwordController,
             usePrefixIcon: false,
             obscureText: _obsecureText,
             hintText: "Enter your password",
             isSecuredField: true,
-            onSuffixIconPressed: () {
+            onLockIconPressed: () {
               setState(() {
                 _obsecureText = !_obsecureText;
               });
             },
             suffixIconVisible: Icons.visibility_off_outlined,
             suffixIconHidden: Icons.visibility_outlined,
-            errorAccurance: authError,
+            errorOccurance: authError,
             validator: (val) {
               if (val == "") {
                 return "";

@@ -6,7 +6,7 @@ import 'package:mobileproject/core/helpers/providers/auth_provider.dart';
 import 'package:mobileproject/core/theming/styles.dart';
 import 'package:mobileproject/core/widgets/app_text_btn.dart';
 import 'package:mobileproject/core/widgets/app_text_field.dart';
-import 'package:mobileproject/features/home/ui/home_screen.dart';
+import 'package:mobileproject/features/home/ui/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpForm extends ConsumerStatefulWidget {
@@ -69,7 +69,10 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
         authError = false;
       });
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen()));
+        MaterialPageRoute(
+          builder: (context) => const MainScreen(),
+        ),
+      );
       final prefs = await SharedPreferences.getInstance();
       prefs.setBool('showHome', true);
     } on FirebaseAuthException catch (error) {
@@ -116,7 +119,8 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
             hintText: "Enter your full name",
             isSecuredField: false,
             usePrefixIcon: false,
-            errorAccurance: authError,
+            errorOccurance: authError,
+            useSuffixIcon: false,
             validator: (val) {
               if (val == "") {
                 return "";
@@ -139,8 +143,9 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
             hintText: "Enter your email address",
             isSecuredField: false,
             usePrefixIcon: false,
-            errorAccurance: authError,
+            errorOccurance: authError,
             keyboardType: TextInputType.emailAddress,
+            useSuffixIcon: false,
             validator: (val) {
               if (val == "") {
                 return "";
@@ -166,8 +171,9 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
             suffixIconHidden: Icons.visibility_outlined,
             suffixIconVisible: Icons.visibility_off_outlined,
             usePrefixIcon: false,
-            errorAccurance: authError,
-            onSuffixIconPressed: () {
+            errorOccurance: authError,
+            useSuffixIcon: false,
+            onLockIconPressed: () {
               setState(() {
                 _obsecureText = !_obsecureText;
               });
