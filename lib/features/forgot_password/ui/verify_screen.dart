@@ -7,9 +7,15 @@ import 'package:mobileproject/core/theming/styles.dart';
 import 'package:mobileproject/core/widgets/app_text_btn.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class VerifyScreen extends StatelessWidget {
+class VerifyScreen extends StatefulWidget {
   const VerifyScreen({super.key});
 
+  @override
+  State<VerifyScreen> createState() => _VerifyScreenState();
+}
+
+class _VerifyScreenState extends State<VerifyScreen> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +72,7 @@ class VerifyScreen extends StatelessWidget {
                           fieldHeight: 60.h,
                           borderWidth: 1.w,
                           borderRadius: BorderRadius.circular(10)),
+                      onCompleted: (value) => {},
                     ),
                   ),
                   SizedBox(height: 5.h),
@@ -103,7 +110,8 @@ class VerifyScreen extends StatelessWidget {
                         buttonText: "Send Code",
                         textStyle: MyTextStyle.font16WhiteRegular,
                         onPressed: () {
-                          Navigator.pushNamed(context, Routes.newPasswordScreen);
+                          Navigator.pushNamed(
+                              context, Routes.newPasswordScreen);
                         }),
                   )
                 ],

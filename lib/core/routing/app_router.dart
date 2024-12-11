@@ -36,9 +36,9 @@ class AppRouter {
       case Routes.forgotPasswordScreen:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
       case Routes.newPasswordScreen:
-        return MaterialPageRoute(builder: (_) => const NewPasswordScreen());
+        // return MaterialPageRoute(builder: (_) => const NewPasswordScreen());
       case Routes.verifyScreen:
-        return MaterialPageRoute(builder: (_) => const VerifyScreen());
+        // return MaterialPageRoute(builder: (_) => const VerifyScreen());
       default:
         return null;
     }
