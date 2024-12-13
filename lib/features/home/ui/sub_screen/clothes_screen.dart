@@ -15,7 +15,7 @@ class _ClothesScreenState extends ConsumerState<ClothesScreen> {
   @override
   void initState() {
     Future(
-      () {
+      () async {
         if (widget.collection == "all") {
           ref.read(clothesProvider.notifier).getAllProducts();
         } else {

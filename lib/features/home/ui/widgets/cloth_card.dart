@@ -48,7 +48,7 @@ class ClothCard extends StatelessWidget {
                       fontSize: 12,
                       color: Colors.black,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
