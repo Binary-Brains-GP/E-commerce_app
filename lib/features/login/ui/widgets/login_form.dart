@@ -67,13 +67,6 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       setState(() {
         authError = false;
       });
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const MainScreen(),
-        ),
-      );
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setBool('showHome', true);
     } on FirebaseAuthException catch (error) {
       setState(() {
         authError = true;
@@ -96,6 +89,16 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           },
         );
       }
+    }
+
+    if (userID != '') {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const MainScreen(),
+        ),
+      );
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setBool('showHome', true);
     }
   }
 
