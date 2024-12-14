@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobileproject/core/models/clothes.dart';
+import 'package:mobileproject/features/home/ui/sub_screen/cloth_details_screen.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ClothCard extends StatelessWidget {
@@ -9,7 +10,11 @@ class ClothCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => ClothDetailsScreen(cloth: cloth),
+        ));
+      },
       child: Card(
         shadowColor: Colors.transparent,
         color: Colors.white,
@@ -31,7 +36,9 @@ class ClothCard extends StatelessWidget {
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(left: 6,),
+              padding: const EdgeInsets.only(
+                left: 6,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
