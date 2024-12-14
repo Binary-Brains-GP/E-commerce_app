@@ -4,13 +4,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
+  final TextInputType? keyboardType;
+  final bool errorOccurance;
+  final String? Function(String?)? validator;
+
+  final bool
+      usePrefixIcon; //------------if true, pass the icon to the prefixIcon var---------
   final IconData? prefixIcon;
+
+  //-------------------suffixIconsproperties
+  final bool useSuffixIcon;
+  final IconData? suffixIcon;
+  final Function()? onSuffixIconPressed;
 //--------------------------------------Password properties--------------------------------------------------
-  final bool isSecuredField;  //--------is this field a secure field or not???-------------
+  final bool
+      isSecuredField; //--------is this field a secure field or not???-------------
   final IconData? suffixIconVisible;
   final IconData? suffixIconHidden;
   final bool? obscureText;
-  final Function()? onSuffixIconPressed;
+  final Function()? onLockIconPressed;
   //---------------------Constants-----------------------
   final Color prefixIconColor;
   final Color suffixIconColor;
@@ -23,22 +35,29 @@ class AppTextField extends StatelessWidget {
 
   const AppTextField({
     super.key,
+    required this.errorOccurance,
     required this.controller,
     required this.hintText,
-    this.prefixIcon,
     required this.isSecuredField,
+    required this.usePrefixIcon,
+    required this.validator,
+    required this.useSuffixIcon,
+    this.onLockIconPressed,
+    this.suffixIcon,
+    this.keyboardType,
+    this.prefixIcon,
     this.obscureText,
     this.suffixIconVisible,
     this.suffixIconHidden,
     this.onSuffixIconPressed,
     this.prefixIconColor = Colors.grey,
     this.suffixIconColor = Colors.grey,
-    this.borderRadius = const BorderRadius.all(Radius.circular(16)),
-    this.blurRadius = 10.0,
-    this.spreadRadius = 5,
-    this.elevationOffset = 10,
+    this.borderRadius = const BorderRadius.all(Radius.circular(10)),
+    this.blurRadius = 60,
+    this.spreadRadius = 1,
+    this.elevationOffset = 3,
     this.contentPadding = 15,
-    this.blurOpacity = 0.1,
+    this.blurOpacity = 0.6,
   });
 
   @override
@@ -47,39 +66,45 @@ class AppTextField extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: borderRadius,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(blurOpacity),
-            spreadRadius:spreadRadius,
-            blurRadius: blurRadius,
-            offset: Offset(0, elevationOffset),
-          ),
-        ],
+        border: Border.all(
+          width: 1.w,
+          color: errorOccurance
+              ? Colors.red
+              : const Color.fromARGB(255, 211, 211, 211),
+        ),
       ),
       child: TextFormField(
+        validator: validator,
+        keyboardType: keyboardType,
         controller: controller,
-        obscureText: isSecuredField? obscureText!: false,
+        obscureText: isSecuredField ? obscureText! : false,
         decoration: InputDecoration(
-          prefixIcon: Icon(prefixIcon, color: prefixIconColor),
-          prefixIconConstraints: BoxConstraints(
-            minWidth: 40.w, // Customize or calculate as needed
-            minHeight: 40.h,
-          ),
+          errorStyle: TextStyle(fontSize: 0.sp),
+          prefixIcon:
+              usePrefixIcon ? Icon(prefixIcon, color: prefixIconColor) : null,
           hintText: hintText,
           hintStyle: const TextStyle(
             color: Color.fromARGB(255, 201, 200, 200),
-            fontFamily: "Poppins",
-
           ),
           border: InputBorder.none,
           contentPadding: EdgeInsets.all(contentPadding),
-          suffixIcon: isSecuredField? IconButton(
-            onPressed: onSuffixIconPressed,
-            icon: Icon(
-              obscureText! ? suffixIconHidden : suffixIconVisible,
-              color: suffixIconColor,
-            ),
-          ): null,
+          suffixIcon: isSecuredField
+              ? IconButton(
+                  onPressed: onLockIconPressed,
+                  icon: Icon(
+                    obscureText! ? suffixIconHidden : suffixIconVisible,
+                    color: suffixIconColor,
+                  ),
+                )
+              : useSuffixIcon
+                  ? IconButton(
+                      onPressed: onSuffixIconPressed,
+                      icon: Icon(
+                        suffixIcon,
+                        color: suffixIconColor,
+                      ),
+                    )
+                  : null,
         ),
       ),
     );

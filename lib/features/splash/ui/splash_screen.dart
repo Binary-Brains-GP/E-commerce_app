@@ -22,7 +22,7 @@ class SplashScreen extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, Routes.loginScreen);
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               AppTextBtn(
                 buttonText: "To Sign UP",
                 textStyle: MyTextStyle.font18WhiteSemiBold,
@@ -30,7 +30,7 @@ class SplashScreen extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, Routes.signUpScreen);
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               AppTextBtn(
                 buttonText: "To Home",
                 textStyle: MyTextStyle.font18WhiteSemiBold,
@@ -38,12 +38,12 @@ class SplashScreen extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, Routes.homeScreen);
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               AppTextBtn(
                 buttonText: "To Forget password",
                 textStyle: MyTextStyle.font18WhiteSemiBold,
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, Routes.forgotPasswordScreen);
+                  Navigator.pushNamed(context, Routes.forgotPasswordScreen);
                 },
               ),
             ],
