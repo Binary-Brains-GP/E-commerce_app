@@ -30,15 +30,23 @@ class AppTextBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+
+
       onPressed: onPressed,
       style: ButtonStyle(
+        overlayColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.pressed)) {
+            return Colors.white.withOpacity(0.6); // Color when pressed
+          }
+          return null; // Default color (no overlay)
+        }),
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius ?? 10.0),
           ),
         ),
         backgroundColor:
-        WidgetStatePropertyAll(backGroundColor ?? MyColors.mainPurple),
+        WidgetStatePropertyAll(backGroundColor ?? MyColors.myMainBlack),
         padding: WidgetStateProperty.all<EdgeInsets>(
           EdgeInsets.symmetric(
               horizontal: horizontalPadding ?? 12.w,
@@ -48,9 +56,11 @@ class AppTextBtn extends StatelessWidget {
           Size(buttonWidth ?? 301.w, buttonHeight ?? 56.h),
         ),
       ),
-      child: Text(
-        buttonText,
-        style: textStyle,
+      child: Center(
+        child: Text(
+          buttonText,
+          style: textStyle,
+        ),
       ),
     );
   }
