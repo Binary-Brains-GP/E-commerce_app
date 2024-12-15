@@ -55,7 +55,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
         // Check if the user canceled the scan
         if (scannedName == '-1') {
-          return null;
+          return "canceled";
         }
 
         final clothes = clothesData.valueOrNull;
@@ -204,10 +204,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 String? searchedByVoice = await searchByVoice();
                                 print(
                                     '--------------$searchedByVoice--------------');
-                                setState(() {
-                                  _searchController.text =
-                                      searchedByVoice.toString();
-                                });
+                                if (searchedByVoice == null) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                          "This product is not availaible!"),
+                                      duration: Durations.extralong4,
+                                    ),
+                                  );
+                                  _searchController.text = '';
+                                } else {
+                                  setState(() {
+                                    _searchController.text =
+                                        searchedByVoice.toString();
+                                  });
+                                }
                               },
                               icon: const Icon(
                                   Icons.mic_outlined), //Search by voice Icon
@@ -240,9 +251,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     //------------------Scanner button----------------
                     onPressed: () async {
                       String? searchedByBarcode = await onTabBarCode();
-                      setState(() {
-                        _searchController.text = searchedByBarcode.toString();
-                      });
+                      if (searchedByBarcode == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("This product is not availaible!"),
+                            duration: Durations.extralong4,
+                          ),
+                        );
+                        _searchController.text = '';
+                      } else if (searchedByBarcode == "canceled") {
+                        _searchController.text = '';
+                      } else {
+                        setState(() {
+                          _searchController.text = searchedByBarcode.toString();
+                        });
+                      }
                     },
                     icon: const Icon(
                       Icons.qr_code_scanner_outlined,
