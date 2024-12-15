@@ -32,6 +32,7 @@ class AppTextBtn extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: ButtonStyle(
+        overlayColor: WidgetStateProperty.all(Colors.white),
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius ?? 10.0),

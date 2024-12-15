@@ -48,7 +48,7 @@ class OnboardingScreen extends StatelessWidget {
         child: Center(
           child: AppTextBtn(
             buttonText: "Get Started",
-            textStyle: MyTextStyle.font18WhiteRegular,
+            textStyle: MyTextStyle.font18WhiteSemiBold,
             onPressed: () {Navigator.pushNamed(context, Routes.accountScreen);},
             buttonWidth: 341,
             buttonHeight: 60,

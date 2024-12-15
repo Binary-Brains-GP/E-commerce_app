@@ -3,6 +3,8 @@ import 'package:mobileproject/core/theming/colors.dart';
 import 'package:mobileproject/core/theming/styles.dart';
 
 class NotificationScreen extends StatefulWidget {
+  const NotificationScreen({super.key});
+
   @override
   _NotificationsScreenState createState() => _NotificationsScreenState();
 }
