@@ -42,35 +42,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 10.h),
-              // Delivery Address
-              //  Text(
-              //   "Delivery Address",
-              //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //      Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         Text(
-              //           "Home",
-              //           style: TextStyle(fontSize: 16),
-              //         ),
-              //         Text(
-              //           "925 S Chugach St #APT 10, Alaska 99645",
-              //           style: TextStyle(color: Colors.grey),
-              //         ),
-              //       ],
-              //     ),
-              //     TextButton(
-              //       onPressed: () {},
-              //       child:  Text("Change"),
-              //     ),
-              //   ],
-              // )
-
-              // Payment Method
               const Text(
                 "Payment Method",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -117,10 +88,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(width: 1, color: Colors.black),
                   ),
-                  // enabledBorder: OutlineInputBorder(
-                  //   borderRadius: BorderRadius.circular(8),
-                  //   borderSide: const BorderSide(width: 1, color: Colors.grey),
-                  // ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide:
@@ -190,69 +157,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class PaymentMethodButton extends StatelessWidget {
-  final String label;
-  final bool isSelected;
-
-  const PaymentMethodButton({
-    super.key,
-    required this.label,
-    this.isSelected = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.black : Colors.grey.shade300,
-          foregroundColor: isSelected ? Colors.white : Colors.black,
-        ),
-        onPressed: () {},
-        child: Text(label),
-      ),
-    );
-  }
-}
-
-class SummaryRow extends StatelessWidget {
-  final String label;
-  final String value;
-  final bool isBold;
-
-  const SummaryRow({
-    super.key,
-    required this.label,
-    required this.value,
-    this.isBold = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-            ),
-          ),
-          Text(
-            value,
-            style: TextStyle(
-              fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-            ),
-          ),
-        ],
       ),
     );
   }

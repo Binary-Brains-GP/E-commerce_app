@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobileproject/core/helpers/providers/clothes_provider.dart';
+import 'package:mobileproject/core/models/cart_item.dart';
 import 'package:mobileproject/core/routing/routes.dart';
 
 import 'package:mobileproject/core/theming/colors.dart';
@@ -21,64 +22,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  // @override
-  // Widget build(BuildContext context) {
-  //   // final clothesData = ref.watch(clothesProvider);
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       backgroundColor: Colors.white,
-  //       leading: IconButton(
-  //         icon: const Icon(Icons.arrow_back),
-  //         onPressed: () {
-  //           Navigator.pop(context); // Navigate back
-  //         },
-  //       ),
-  //       title: Text(
-  //         "My Cart",
-  //         style: MyTextStyle.font24BlackBold,
-  //       ),
-  //       centerTitle: true,
-  //     ),
-  //     body: CustomScrollView(
-  //       slivers: [
-  //         SliverFillRemaining(
-  //           child: Padding(
-  //             padding: EdgeInsets.only(
-  //                 top: 0.h, right: 25.0.w, left: 25.0.w, bottom: 25.h),
-  //             child: Column(
-  //               mainAxisAlignment: MainAxisAlignment.start,
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               children: [
-  //           //       GridView.builder(
-  //           // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-  //           //   mainAxisExtent: 250,
-  //           //   crossAxisCount: 2, // Number of columns
-  //           //   mainAxisSpacing: 10, // Vertical spacing
-  //           // ),
-  //           // itemCount: clothesData.length,
-  //           // itemBuilder: (context, index) {
-  //           //   return ClothCard(cloth: clothesData[index]);
-  //           // },
-  //         // ),
-  //                 const Spacer(flex: 1),
-  //                 Center(
-  //                   child: AppTextBtn(
-  //                       backGroundColor: MyColors.myBlack,
-  //                       buttonWidth: 341.w,
-  //                       buttonHeight: 54.h,
-  //                       buttonText: "Send email",
-  //                       textStyle: MyTextStyle.font16WhiteRegular,
-  //                       onPressed: () {}),
-  //                 )
-  //               ],
-  //             ),
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
-  // Data for cart items
+
   final List<CartItem> cartItems = [
     CartItem(name: "Regular Fit Slogan", size: "L", price: 1190, quantity: 2),
     CartItem(name: "Regular Fit Polo", size: "M", price: 1100, quantity: 1),
@@ -172,20 +116,4 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
-
-  
-}
-
-class CartItem {
-  final String name;
-  final String size;
-  final double price;
-  int quantity;
-  // final String image;
-
-  CartItem(
-      {required this.name,
-      required this.size,
-      required this.price,
-      required this.quantity});
 }
