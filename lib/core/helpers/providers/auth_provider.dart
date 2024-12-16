@@ -26,18 +26,7 @@ class AuthProvider extends StateNotifier<String> {
       email: email.text,
       password: password.text,
     );
-    final newUser = userCredentials.user;
-    if (newUser != null) {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(newUser.uid)
-          .set({
-        'uid': newUser.uid,
-        'name': userName,
-        'email': email,
-        'isAdmin': false,
-      });
-    }
+    final newUser = FirebaseAuth.instance.currentUser;
     state = newUser!.uid;
   }
 }
