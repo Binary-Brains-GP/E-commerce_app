@@ -47,6 +47,12 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const MyDetailsScreen());
       case Routes.myOrdersScreen:
         return MaterialPageRoute(builder: (_) => const MyOrdersScreen());
+      case Routes.newPasswordScreen:
+      // return MaterialPageRoute(builder: (_) => const NewPasswordScreen());
+      case Routes.verifyScreen:
+      // return MaterialPageRoute(builder: (_) => const VerifyScreen());
+      case Routes.checkoutScreen:
+        return MaterialPageRoute(builder: (_) => const CheckoutScreen());
       default:
         return null;
     }

@@ -52,5 +52,9 @@ class MyTextStyle {
     fontSize: 16.sp,
     fontFamily: "poppins",
     color: Colors.white,
+  );static TextStyle font14WhiteRegular = TextStyle(
+    fontSize: 14.sp,
+    fontFamily: "poppins",
+    color: Colors.white,
   );
 }
