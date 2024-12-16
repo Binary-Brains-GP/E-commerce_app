@@ -1,10 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobileproject/core/helpers/providers/cart_content_provider.dart';
-import 'package:mobileproject/core/helpers/providers/clothes_provider.dart';
-import 'package:mobileproject/core/models/cart_item.dart';
 import 'package:mobileproject/core/models/clothes.dart';
 import 'package:mobileproject/core/routing/routes.dart';
 import 'package:mobileproject/core/theming/colors.dart';
