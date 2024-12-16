@@ -16,12 +16,16 @@ class MobileTask extends StatelessWidget {
       designSize: const Size(390, 844),
       minTextAdapt: true,
       child: MaterialApp(
+<<<<<<< HEAD
         title: 'E_commere',
+=======
+        title: 'E-commerce',
+>>>>>>> fd7a2219f4b0272702af97484896aec4dbc89ae0
         theme: ThemeData(
             primaryColor: Colors.white,
             scaffoldBackgroundColor: Colors.white),
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.splashScreen,
+        initialRoute: Routes.onBoardingScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );

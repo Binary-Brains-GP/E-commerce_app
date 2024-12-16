@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobileproject/features/account/ui/account_screen.dart';
 import 'package:mobileproject/features/home/ui/home_screen.dart';
-import 'package:mobileproject/features/home/ui/sub_screen/account_screen.dart';
 import 'package:mobileproject/features/home/ui/sub_screen/cart_screen.dart';
 
 class MainScreen extends StatefulWidget {
