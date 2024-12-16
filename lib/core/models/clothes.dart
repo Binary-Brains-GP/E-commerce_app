@@ -18,7 +18,7 @@ class Clothes {
   String category;
   String size = "small";
   String? feedback;
-  double? rate;
+  int? rate;
   String? status;
 
   Clothes({
@@ -75,5 +75,14 @@ class Clothes {
       quantity: doc['quantity'] ?? 0,
       category: category,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'price': price,
+      'feedback': feedback,
+      'rate': rate,
+    };
   }
 }

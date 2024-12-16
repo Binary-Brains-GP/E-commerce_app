@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mobileproject/core/models/clothes.dart';
 
 class OrderCard extends StatefulWidget {
-  final String imageUrl;
-  final String title;
-  final String size;
-  final String price;
-  final String status;
+  final Clothes cloth;
   final VoidCallback onTrackOrder;
+  final bool isOngoingSelected;
 
   const OrderCard({
-    Key? key,
-    required this.imageUrl,
-    required this.title,
-    required this.size,
-    required this.price,
-    required this.status,
+    super.key,
+    required this.cloth,
     required this.onTrackOrder,
-  }) : super(key: key);
+    required this.isOngoingSelected,
+  });
 
   @override
   State<OrderCard> createState() => _OrderCardState();
@@ -46,7 +41,7 @@ class _OrderCardState extends State<OrderCard> {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
-              "assets/images/Ankle Boots.jpg",
+              widget.cloth.imagePath.toString(),
               width: 80,
               height: 80,
               fit: BoxFit.cover,
@@ -60,7 +55,7 @@ class _OrderCardState extends State<OrderCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.title,
+                  widget.cloth.name,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -68,7 +63,7 @@ class _OrderCardState extends State<OrderCard> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Size ${widget.size}',
+                  'Size ${widget.cloth.size}',
                   style: const TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
@@ -76,7 +71,7 @@ class _OrderCardState extends State<OrderCard> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '\$${widget.price}',
+                  '\$${widget.cloth.price}',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -92,19 +87,20 @@ class _OrderCardState extends State<OrderCard> {
             children: [
               // Status Label
               Container(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Text(
-                  widget.status,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.black,
-                  ),
-                ),
+                child: widget.isOngoingSelected
+                    ? const Icon(
+                        Icons.hourglass_empty_outlined,
+                        size: 15,
+                      )
+                    : const Icon(
+                        Icons.done,
+                        size: 15,
+                      ),
               ),
               const SizedBox(height: 12),
               // Track Order Button
@@ -115,12 +111,12 @@ class _OrderCardState extends State<OrderCard> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 ),
                 onPressed: widget.onTrackOrder,
-                child: const Text(
-                  'Track Order',
-                  style: TextStyle(
+                child: Text(
+                  widget.isOngoingSelected ? 'Track Order' : 'Give review',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
                   ),

@@ -2,10 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobileproject/core/helpers/providers/clothes_provider.dart';
-import 'package:mobileproject/core/models/clothes.dart';
 import 'package:mobileproject/core/theming/styles.dart';
-import 'package:mobileproject/core/widgets/app_text_field.dart';
 
 class BestSelling extends ConsumerStatefulWidget {
   const BestSelling({
