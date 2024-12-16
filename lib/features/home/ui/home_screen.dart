@@ -97,7 +97,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           return null;
         }
 
-        final Completer<String?> completer = Completer<String?>();
         String? finalRecognizedWords;
 
         // Start listening

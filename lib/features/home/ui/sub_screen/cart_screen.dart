@@ -1,15 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobileproject/core/helpers/providers/clothes_provider.dart';
 import 'package:mobileproject/core/models/cart_item.dart';
 import 'package:mobileproject/core/routing/routes.dart';
-
 import 'package:mobileproject/core/theming/colors.dart';
 import 'package:mobileproject/core/theming/styles.dart';
 import 'package:mobileproject/core/widgets/app_text_btn.dart';
-import 'package:mobileproject/features/checkout/checkout_screen.dart';
 import 'package:mobileproject/features/home/ui/widgets/build_empty_cart.dart';
 import 'package:mobileproject/features/home/ui/widgets/build_summary_row.dart';
 import 'package:mobileproject/features/home/ui/widgets/cart_card.dart';
@@ -22,7 +18,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-
   final List<CartItem> cartItems = [
     CartItem(name: "Regular Fit Slogan", size: "L", price: 1190, quantity: 2),
     CartItem(name: "Regular Fit Polo", size: "M", price: 1100, quantity: 1),
@@ -65,55 +60,62 @@ class _CartScreenState extends State<CartScreen> {
         //   icon: const Icon(Icons.arrow_back),
         //   onPressed: () {
         //     Navigator.pop(context); // Navigate back
-          // },
+        // },
         // ),
       ),
-      body:cartItems.isEmpty ? buildEmptyCart() : Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: cartItems.length,
-              itemBuilder: (context, index) {
-                return CartItemWidget(
-                  item: cartItems[index],
-                  onIncrement: () => incrementQuantity(index),
-                  onDecrement: () => decrementQuantity(index),
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: cartItems.isEmpty
+          ? buildEmptyCart()
+          : Column(
               children: [
-                buildSummaryRow(
-                    "Sub-total", "\$${subtotal.toStringAsFixed(2)}"),
-                buildSummaryRow("VAT (%)", "\$0.00"),
-                buildSummaryRow(
-                    "Shipping fee", "\$${shippingFee.toStringAsFixed(2)}"),
-                const Divider(thickness: 1),
-                buildSummaryRow("Total", "\$${total.toStringAsFixed(2)}",
-                    isBold: true),
-                SizedBox(height: 16.h),
-                Center(
-                  child: AppTextBtn(
-                    buttonText: "Go To Checkout",
-                    onPressed: () {
-                      Navigator.pushNamed(context, Routes.checkoutScreen,arguments: {'subTotal':{subtotal},'shippingFee':shippingFee,'total':total});
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: cartItems.length,
+                    itemBuilder: (context, index) {
+                      return CartItemWidget(
+                        item: cartItems[index],
+                        onIncrement: () => incrementQuantity(index),
+                        onDecrement: () => decrementQuantity(index),
+                      );
                     },
-                    backGroundColor: MyColors.myBlack,
-                    textStyle: MyTextStyle.font16WhiteRegular,
-                    borderRadius: 10,
-                    buttonHeight: 55.h,
-                    buttonWidth: 340.w,
                   ),
-                )
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildSummaryRow(
+                          "Sub-total", "\$${subtotal.toStringAsFixed(2)}"),
+                      buildSummaryRow("VAT (%)", "\$0.00"),
+                      buildSummaryRow("Shipping fee",
+                          "\$${shippingFee.toStringAsFixed(2)}"),
+                      const Divider(thickness: 1),
+                      buildSummaryRow("Total", "\$${total.toStringAsFixed(2)}",
+                          isBold: true),
+                      SizedBox(height: 16.h),
+                      Center(
+                        child: AppTextBtn(
+                          buttonText: "Go To Checkout",
+                          onPressed: () {
+                            Navigator.pushNamed(context, Routes.checkoutScreen,
+                                arguments: {
+                                  'subTotal': {subtotal},
+                                  'shippingFee': shippingFee,
+                                  'total': total
+                                });
+                          },
+                          backGroundColor: MyColors.myBlack,
+                          textStyle: MyTextStyle.font16WhiteRegular,
+                          borderRadius: 10,
+                          buttonHeight: 55.h,
+                          buttonWidth: 340.w,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -16,6 +16,9 @@ class Clothes {
   int cartQuantity;
   String category;
   String size = "small";
+  String? feedback;
+  double? rate;
+  String? status;
 
   Clothes({
     required this.uID,
@@ -24,6 +27,9 @@ class Clothes {
     required this.price,
     required this.quantity,
     required this.category,
+    this.feedback,
+    this.rate,
+    this.status,
     this.cartQuantity = 0,
     this.imagePath,
   });
