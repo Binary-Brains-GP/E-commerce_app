@@ -7,6 +7,7 @@ import 'package:mobileproject/core/routing/routes.dart';
 import 'package:mobileproject/core/theming/colors.dart';
 import 'package:mobileproject/core/theming/styles.dart';
 import 'package:mobileproject/core/widgets/app_text_btn.dart';
+import 'package:mobileproject/features/checkout/checkout_screen.dart';
 import 'package:mobileproject/features/home/ui/widgets/build_empty_cart.dart';
 import 'package:mobileproject/features/home/ui/widgets/build_summary_row.dart';
 import 'package:mobileproject/features/home/ui/widgets/cart_card.dart';
@@ -21,12 +22,13 @@ class CartScreen extends ConsumerStatefulWidget {
 class _CartScreenState extends ConsumerState<CartScreen> {
   List<Clothes> cartItems = [];
   bool isExist = false;
-
   final double shippingFee = 80;
-  double get subtotal =>
-      cartItems.fold(0, (sum, item) => sum + item.price * item.cartQuantity);
+  final double vat = 10;
 
-  double get total => subtotal + shippingFee;
+  double get subTotal =>
+      cartItems.fold(0, (sum, item) => sum + (item.price + item.price * vat/100) * item.cartQuantity);
+
+  double get total => subTotal + shippingFee;
 
   void incrementQuantity(Clothes cloth) {
     setState(() {
@@ -84,8 +86,8 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       buildSummaryRow(
-                          "Sub-total", "\$${subtotal.toStringAsFixed(2)}"),
-                      buildSummaryRow("VAT (%)", "\$0.00"),
+                          "Sub-total", "\$${subTotal.toStringAsFixed(2)}"),
+                      buildSummaryRow("VAT (%)", "%$vat"),
                       buildSummaryRow("Shipping fee",
                           "\$${shippingFee.toStringAsFixed(2)}"),
                       const Divider(thickness: 1),
@@ -96,12 +98,14 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                         child: AppTextBtn(
                           buttonText: "Go To Checkout",
                           onPressed: () {
-                            Navigator.pushNamed(context, Routes.checkoutScreen,
-                                arguments: {
-                                  'subTotal': {subtotal},
-                                  'shippingFee': shippingFee,
-                                  'total': total
-                                });
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => CheckoutScreen(
+                                shippingFee: shippingFee,
+                                subTotal: subTotal,
+                                total: total,
+                                vat: vat,
+                              ),
+                            ));
                           },
                           backGroundColor: MyColors.myBlack,
                           textStyle: MyTextStyle.font16WhiteRegular,

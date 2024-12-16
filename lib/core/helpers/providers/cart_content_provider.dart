@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobileproject/core/models/clothes.dart';
 
@@ -36,6 +38,27 @@ class CartContentProvider extends StateNotifier<List<Clothes>> {
   void removeFromCart(Clothes cloth) {
     state = state.where((m) => m.uID != cloth.uID).toList();
     cloth.cartQuantity = 0;
+  }
+
+  void addListToUser() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    try{
+    final String? userID = _auth.currentUser?.uid;
+
+    if(userID == null){
+      throw Exception("No user signed in");
+    }
+
+    final List<Map<String,dynamic>> cartItems = state.map((e) => e.toMap(),).toList();
+
+    final userDoc = _firestore.collection('users').doc(userID);
+    await userDoc.update({
+      'cartItems': cartItems,
+    });
+    }catch(e){
+      print("Error: $e");
+    }
   }
 }
 

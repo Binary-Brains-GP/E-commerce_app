@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobileproject/core/helpers/providers/auth_provider.dart';
 import 'package:mobileproject/core/helpers/providers/privileges_provider.dart';
+import 'package:mobileproject/core/routing/routes.dart';
 import 'package:mobileproject/core/theming/styles.dart';
 import 'package:mobileproject/core/widgets/app_text_btn.dart';
 import 'package:mobileproject/core/widgets/app_text_field.dart';
@@ -174,7 +175,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {Navigator.pushNamed(context, Routes.forgotPasswordScreen);},
                 child: const Text(
                   'Reset your password',
                   style: TextStyle(
