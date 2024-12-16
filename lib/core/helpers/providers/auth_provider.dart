@@ -25,7 +25,7 @@ class AuthProvider extends StateNotifier<String> {
     TextEditingController password,
     TextEditingController userName,
   ) async {
-    final userCredentials =
+   final userCredentials =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email.text,
       password: password.text,
