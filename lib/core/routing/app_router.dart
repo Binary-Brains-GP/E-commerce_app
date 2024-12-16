@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mobileproject/core/routing/routes.dart';
-import 'package:mobileproject/features/account/widgets/faqs_screen.dart';
-import 'package:mobileproject/features/account/widgets/help_center_screen.dart';
-import 'package:mobileproject/features/account/widgets/my_details_screen.dart';
-import 'package:mobileproject/features/account/widgets/my_orders_screen.dart';
-import 'package:mobileproject/features/account/widgets/notification_screen.dart';
+import 'package:mobileproject/features/account/ui/faqs_screen.dart';
+import 'package:mobileproject/features/account/ui/help_center_screen.dart';
+
+import 'package:mobileproject/features/account/ui/my_details_screen.dart';
+import 'package:mobileproject/features/account/ui/my_orders_screen.dart';
+import 'package:mobileproject/features/account/ui/notification_screen.dart';
 import 'package:mobileproject/features/checkout/checkout_screen.dart';
-import 'package:mobileproject/features/home/ui/sub_screen/cloth_details_screen.dart';
 import 'package:mobileproject/features/onboarding/ui/onboarding_screen.dart';
-import 'package:mobileproject/features/checkout/checkout_screen.dart';
 
 import '../../features/forgot_password/ui/forgot_password_screen.dart';
 import '../../features/login/ui/login_screen.dart';
 import '../../features/sign_up/ui/sign_up_screen.dart';
-import '../../features/splash/ui/splash_screen.dart';
 
 class AppRouter {
   // final bool showHome;
@@ -27,7 +25,6 @@ class AppRouter {
     //final arguments = settings.arguments;
 
     switch (settings.name) {
-
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
           builder: (_) => const OnboardingScreen(),
@@ -43,7 +40,7 @@ class AppRouter {
       case Routes.myFAQsScreen:
         return MaterialPageRoute(builder: (_) => const FaqsScreen());
       case Routes.notificationScreen:
-        return MaterialPageRoute(builder: (_) =>  NotificationScreen());
+        return MaterialPageRoute(builder: (_) => NotificationScreen());
       case Routes.myDetailsScreen:
         return MaterialPageRoute(builder: (_) => const MyDetailsScreen());
       case Routes.myOrdersScreen:

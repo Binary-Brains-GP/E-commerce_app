@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobileproject/core/theming/colors.dart';
 import 'package:mobileproject/core/theming/styles.dart';
 import 'package:mobileproject/core/widgets/app_text_btn.dart';
+import 'package:mobileproject/features/account/widgets/leave_review_sheet.dart';
+import 'package:mobileproject/features/account/widgets/order_card.dart';
 
 class MyOrdersScreen extends StatefulWidget {
   const MyOrdersScreen({super.key});
@@ -13,7 +15,16 @@ class MyOrdersScreen extends StatefulWidget {
 class _MyOrdersScreenState extends State<MyOrdersScreen> {
   // To track the selected button
   bool isOngoingSelected = true;
-
+  void _showLeaveReviewSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => LeaveReviewSheet(), // Review sheet widget
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +67,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                     buttonText: "Ongoing",
                     textStyle: TextStyle(
                       fontSize: 14,
-                      color: isOngoingSelected ? Colors.black87 : Colors.black45,
+                      color:
+                          isOngoingSelected ? Colors.black87 : Colors.black45,
                     ),
                     onPressed: () {
                       setState(() {
@@ -75,7 +87,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                     buttonText: "Complete",
                     textStyle: TextStyle(
                       fontSize: 14,
-                      color: isOngoingSelected ? Colors.black45 : Colors.black87,
+                      color:
+                          isOngoingSelected ? Colors.black45 : Colors.black87,
                     ),
                     onPressed: () {
                       setState(() {
@@ -85,7 +98,19 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                   ),
                 ],
               ),
-            )
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            OrderCard(
+              title: "Leather Jacket",
+              size: "L",
+              imageUrl: "",
+              onTrackOrder: () {
+                _showLeaveReviewSheet(context); // Open review sheet here
+              },              price: "30",
+              status: "Complete",
+            ),
           ],
         ),
       ),
