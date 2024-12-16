@@ -9,6 +9,10 @@ class MyTextStyle {
       fontFamily: "poppins",
       fontWeight: FontWeight.w600,
       color: Colors.white);
+  static TextStyle font18WhiteRegular = TextStyle(
+      fontSize: 18.sp,
+      fontFamily: "poppins",
+      color: Colors.white);
   static TextStyle font18BlackSemiBold = TextStyle(
       fontSize: 18.sp,
       fontFamily: "poppins",
