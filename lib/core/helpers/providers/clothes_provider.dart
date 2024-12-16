@@ -10,7 +10,7 @@ class ClothesProvider extends StateNotifier<AsyncValue<List<Clothes>>> {
       // Fetch data from Firestore
       final snapshot = await _firestore.collection(collection).get();
       final clothesList = snapshot.docs.map((doc) {
-        return Clothes.fromFirestore(doc.data() as Map<String, dynamic>);
+        return Clothes.fromFirestore(doc.data());
       }).toList();
       state = AsyncValue.data(clothesList); // Update state with the data
     } catch (e, StackTrace) {
@@ -21,9 +21,8 @@ class ClothesProvider extends StateNotifier<AsyncValue<List<Clothes>>> {
 
   Future<void> getAllProducts() async {
     try {
-      state = const AsyncValue.loading(); // Set loading state
+      state = const AsyncValue.loading();
 
-      // Combine documents from all collections
       final categories = [
         'men',
         'women',
@@ -34,7 +33,7 @@ class ClothesProvider extends StateNotifier<AsyncValue<List<Clothes>>> {
       for (String category in categories) {
         final snapshot = await _firestore.collection(category).get();
         allProducts.addAll(snapshot.docs.map((doc) {
-          return Clothes.fromFirestore(doc.data() as Map<String, dynamic>);
+          return Clothes.fromFirestore(doc.data());
         }));
       }
 

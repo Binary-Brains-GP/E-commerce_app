@@ -6,19 +6,15 @@ class AuthProvider extends StateNotifier<String> {
   AuthProvider() : super('');
   Future<void> signIn(
       TextEditingController email, TextEditingController password) async {
-    // final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-    //   email: email.text,
-    //   password: password.text,
-    // );
     try {
-      final userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email.text,
         password: password.text,
       );
-      print('User ID: ${userCredential.user?.uid}');
+      final currentUser = FirebaseAuth.instance.currentUser!;
+      state = currentUser.uid;
     } catch (e) {
-      print('Error signing in: $e');
+      print(e);
     }
   }
 

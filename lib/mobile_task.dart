@@ -16,12 +16,12 @@ class MobileTask extends StatelessWidget {
       designSize: const Size(390, 844),
       minTextAdapt: true,
       child: MaterialApp(
-        title: 'BinaryBrains',
+        title: 'E-commerce',
         theme: ThemeData(
             primaryColor: Colors.white,
             scaffoldBackgroundColor: Colors.white),
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.splashScreen,
+        initialRoute: Routes.onBoardingScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );

@@ -4,29 +4,6 @@ import 'colors.dart';
 
 class MyTextStyle {
   //her we add out custom fonts even if we gonna use it once (:
-  static TextStyle font24BlackBold = TextStyle(
-    fontSize: 24.sp,
-    fontFamily: "poppins",
-    fontWeight: FontWeight.bold,
-    color: Color.fromARGB(255, 26, 26, 26),
-  );
-  static TextStyle font24LightPurpleBold = TextStyle(
-    fontSize: 24.sp,
-    fontFamily: "poppins",
-    fontWeight: FontWeight.bold,
-    color: MyColors.myLightPurple,
-  );
-  static TextStyle font48LightPurpleBold = TextStyle(
-    fontSize: 48.sp,
-    fontFamily: "poppins",
-    fontWeight: FontWeight.bold,
-    color: MyColors.myLightPurple,
-  );
-  static TextStyle font18MainPurpleSemiBold = TextStyle(
-      fontSize: 18.sp,
-      fontFamily: "poppins",
-      fontWeight: FontWeight.w600,
-      color: MyColors.mainPurple);
   static TextStyle font18WhiteSemiBold = TextStyle(
       fontSize: 18.sp,
       fontFamily: "poppins",
@@ -35,7 +12,7 @@ class MyTextStyle {
   static TextStyle font18BlackSemiBold = TextStyle(
       fontSize: 18.sp,
       fontFamily: "poppins",
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w500,
       color: Colors.black);
   static TextStyle font22BlackSemiBold = TextStyle(
     fontSize: 22.sp,
@@ -65,18 +42,7 @@ class MyTextStyle {
       fontFamily: "poppins",
       fontWeight: FontWeight.bold,
       color: Colors.black);
-  static TextStyle font26MainPurpleBold = TextStyle(
-    fontSize: 26.sp,
-    fontFamily: "poppins",
-    fontWeight: FontWeight.bold,
-    color: MyColors.mainPurple,
-  );
-  static TextStyle font22MainPurpleSemiBold = TextStyle(
-    fontSize: 22.sp,
-    fontFamily: "poppins",
-    fontWeight: FontWeight.w600,
-    color: MyColors.mainPurple,
-  );
+
   static TextStyle font16DescriptionTextRegular = TextStyle(
     fontSize: 16.sp,
     fontFamily: "poppins",
