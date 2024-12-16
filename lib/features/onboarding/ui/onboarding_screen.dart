@@ -44,12 +44,13 @@ class OnboardingScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
         height: 100,
         child: Center(
           child: AppTextBtn(
             buttonText: "Get Started",
             textStyle: MyTextStyle.font18WhiteSemiBold,
-            onPressed: () {Navigator.pushNamed(context, Routes.accountScreen);},
+            onPressed: () {Navigator.pushNamed(context, Routes.loginScreen);},
             buttonWidth: 341,
             buttonHeight: 60,
           ),

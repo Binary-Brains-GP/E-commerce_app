@@ -6,6 +6,8 @@ import 'package:mobileproject/features/account/widgets/help_center_screen.dart';
 import 'package:mobileproject/features/account/widgets/my_details_screen.dart';
 import 'package:mobileproject/features/account/widgets/my_orders_screen.dart';
 import 'package:mobileproject/features/account/widgets/notification_screen.dart';
+import 'package:mobileproject/features/home/ui/sub_screen/cloth_details_screen.dart';
+import 'package:mobileproject/features/onboarding/ui/onboarding_screen.dart';
 
 import '../../features/forgot_password/ui/forgot_password_screen.dart';
 import '../../features/login/ui/login_screen.dart';
@@ -24,13 +26,10 @@ class AppRouter {
     //final arguments = settings.arguments;
 
     switch (settings.name) {
-      case Routes.splashScreen:
-        return MaterialPageRoute(
-          builder: (_) => const SplashScreen(),
-        );
+
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
+          builder: (_) => const OnboardingScreen(),
         );
       case Routes.loginScreen:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
