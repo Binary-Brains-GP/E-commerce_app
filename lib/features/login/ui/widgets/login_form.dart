@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobileproject/core/helpers/providers/auth_provider.dart';
+import 'package:mobileproject/core/helpers/providers/privileges_provider.dart';
 import 'package:mobileproject/core/theming/styles.dart';
 import 'package:mobileproject/core/widgets/app_text_btn.dart';
 import 'package:mobileproject/core/widgets/app_text_field.dart';
@@ -67,6 +68,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       setState(() {
         authError = false;
       });
+      await ref.watch(privilegesProvider.notifier).fetchUserData(userID);
     } on FirebaseAuthException catch (error) {
       setState(() {
         authError = true;

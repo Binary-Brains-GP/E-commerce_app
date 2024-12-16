@@ -5,7 +5,9 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobileproject/core/helpers/providers/all_clothes_provider.dart';
+import 'package:mobileproject/core/helpers/providers/privileges_provider.dart';
 import 'package:mobileproject/core/models/clothes.dart';
+import 'package:mobileproject/features/home/ui/sub_screen/Admin/add_cloth.dart';
 import 'package:mobileproject/features/home/ui/sub_screen/clothes_screen.dart';
 import 'package:mobileproject/features/home/ui/widgets/cloth_card.dart';
 import 'package:searchfield/searchfield.dart';
@@ -21,9 +23,10 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   final _searchController = TextEditingController();
   // ignore: prefer_typing_uninitialized_variables
-  var searchedCloth;
+  late Clothes searchedCloth;
   var isSearching = false;
   late stt.SpeechToText _speech;
+  bool isAdmin = false;
 
   @override
   void initState() {
@@ -32,6 +35,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     Future(
       () {
         ref.watch(allClothesProvider.notifier).getAllProducts();
+        final currentUser = ref.watch(privilegesProvider).valueOrNull!;
+        isAdmin = currentUser.isAdmin;
       },
     );
   }
@@ -91,7 +96,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           return null;
         }
 
-        //final Completer<String?> completer = Completer<String?>();
+        final Completer<String?> completer = Completer<String?>();
         String? finalRecognizedWords;
 
         // Start listening
@@ -128,11 +133,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               cloth.name.toLowerCase() == finalRecognizedWords!.toLowerCase(),
         );
 
-        if (matchedCloth == null) {
-          print('No matching cloth found');
-          return null;
-        }
-
         return matchedCloth.name;
       } catch (e) {
         print('Error in searchByVoice: $e');
@@ -154,13 +154,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications_none_outlined,
-                size: 35,
+            if (isAdmin)
+              IconButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    useSafeArea: true,
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) => const AddCloth(),
+                  );
+                },
+                icon: const Icon(
+                  Icons.add,
+                  size: 40,
+                  color: Colors.black,
+                ),
               ),
-            ),
           ],
         ),
         body: Container(
@@ -286,7 +295,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       crossAxisCount: 2, // Number of columns
                       mainAxisSpacing: 10,
                     ),
-                    children: [ClothCard(cloth: searchedCloth)],
+                    children: [
+                      ClothCard(
+                        cloth: searchedCloth,
+                        category: searchedCloth.category,
+                      )
+                    ],
                   ),
                 ),
               //----------------------------------------------------------normal page without searching

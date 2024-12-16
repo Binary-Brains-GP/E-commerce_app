@@ -1,3 +1,5 @@
+import 'package:mobileproject/core/helpers/asset_utils.dart';
+
 enum Category {
   men,
   women,
@@ -5,44 +7,65 @@ enum Category {
 }
 
 class Clothes {
+  final String uID;
   final String name;
   final String description;
   final double price;
   final String? imagePath;
   int quantity;
   int cartQuantity;
-  Category category;
+  String category;
   String size = "small";
 
   Clothes({
+    required this.uID,
     required this.name,
     required this.description,
     required this.price,
     required this.quantity,
+    required this.category,
     this.cartQuantity = 0,
-    this.category = Category.men,
     this.imagePath,
   });
 
-  // Convert a Firestore document to a Product
-  factory Clothes.fromFirestore(Map<String, dynamic> doc) {
+  Clothes copyWith({
+    String? id,
+    String? name,
+    double? price,
+    String? imageUrl,
+    String? category,
+    required String description,
+    required int quantity,
+  }) {
     return Clothes(
-      name: doc['name'],
-      description: doc['description'],
-      price: double.tryParse(doc['price'].toString()) ?? 0.0,
-      imagePath: 'assets/images/${doc['name'] ?? 'default_image'}.jpg',
-      quantity: doc['quantity'],
+      uID: id ?? uID,
+      name: name ?? this.name,
+      price: price ?? this.price,
+      description: description,
+      quantity: quantity,
+      category: category ?? this.category,
     );
   }
 
-  // Convert a Product to a Map
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'description': description,
-      'price': price,
-      'imagePath': imagePath,
-      'quantity': quantity,
-    };
+  // Convert a Firestore document to a Product
+  static Future<Clothes> fromFirestoreAsync(
+      Map<String, dynamic> doc, String docId, String category) async {
+    final imageName = doc['name'] ?? 'default_image';
+    final imagePath = 'assets/images/$imageName.jpg';
+
+    final imageExistsInAssets = await imageExists(imagePath);
+
+    final resolvedImagePath =
+        imageExistsInAssets ? imagePath : 'assets/images/default_image.jpg';
+
+    return Clothes(
+      uID: docId,
+      name: doc['name'] ?? '',
+      description: doc['description'] ?? '',
+      price: double.tryParse(doc['price'].toString()) ?? 0.0,
+      imagePath: resolvedImagePath,
+      quantity: doc['quantity'] ?? 0,
+      category: category,
+    );
   }
 }
