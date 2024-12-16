@@ -5,6 +5,7 @@ import 'package:mobileproject/features/account/widgets/help_center_screen.dart';
 import 'package:mobileproject/features/account/widgets/my_details_screen.dart';
 import 'package:mobileproject/features/account/widgets/my_orders_screen.dart';
 import 'package:mobileproject/features/account/widgets/notification_screen.dart';
+import 'package:mobileproject/features/checkout/checkout_screen.dart';
 import 'package:mobileproject/features/home/ui/sub_screen/cloth_details_screen.dart';
 import 'package:mobileproject/features/onboarding/ui/onboarding_screen.dart';
 import 'package:mobileproject/features/checkout/checkout_screen.dart';
@@ -37,10 +38,19 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
       case Routes.forgotPasswordScreen:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
+      case Routes.helpCenterScreen:
+        return MaterialPageRoute(builder: (_) => const HelpCenterScreen());
+      case Routes.myFAQsScreen:
+        return MaterialPageRoute(builder: (_) => const FaqsScreen());
+      case Routes.notificationScreen:
+        return MaterialPageRoute(builder: (_) =>  NotificationScreen());
+      case Routes.myDetailsScreen:
+        return MaterialPageRoute(builder: (_) => const MyDetailsScreen());
+      case Routes.myOrdersScreen:
+        return MaterialPageRoute(builder: (_) => const MyOrdersScreen());
       case Routes.newPasswordScreen:
-        // return MaterialPageRoute(builder: (_) => const NewPasswordScreen());
-      case Routes.verifyScreen:
-        // return MaterialPageRoute(builder: (_) => const VerifyScreen());
+      case Routes.checkoutScreen:
+        return MaterialPageRoute(builder: (_) => const CheckoutScreen());
       default:
         return null;
     }

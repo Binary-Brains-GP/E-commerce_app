@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobileproject/core/models/clothes.dart';
 
 class AuthProvider extends StateNotifier<String> {
   AuthProvider() : super('');
@@ -19,8 +20,11 @@ class AuthProvider extends StateNotifier<String> {
     }
   }
 
-  Future<void> signUp(TextEditingController email,
-      TextEditingController password, TextEditingController userName) async {
+  Future<void> signUp(
+    TextEditingController email,
+    TextEditingController password,
+    TextEditingController userName,
+  ) async {
     final userCredentials =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email.text,
@@ -33,8 +37,8 @@ class AuthProvider extends StateNotifier<String> {
           .doc(newUser.uid)
           .set({
         'uid': newUser.uid,
-        'name': userName,
-        'email': email,
+        'name': userName.text,
+        'email': email.text,
         'isAdmin': false,
       });
     }
