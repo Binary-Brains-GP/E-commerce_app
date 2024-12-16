@@ -5,14 +5,15 @@ import 'package:mobileproject/features/home/ui/sub_screen/cloth_details_screen.d
 import 'package:transparent_image/transparent_image.dart';
 
 class ClothCard extends StatelessWidget {
-  const ClothCard({super.key, required this.cloth});
+  const ClothCard({super.key, required this.cloth, required this.category});
+  final String category;
   final Clothes cloth;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => ClothDetailsScreen(cloth: cloth),
+          builder: (context) => ClothDetailsScreen(cloth: cloth, category: category),
         ));
       },
       child: Card(

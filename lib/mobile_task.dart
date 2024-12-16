@@ -16,7 +16,7 @@ class MobileTask extends StatelessWidget {
       designSize: const Size(390, 844),
       minTextAdapt: true,
       child: MaterialApp(
-        title: 'BinaryBrains',
+        title: 'E_commere',
         theme: ThemeData(
             primaryColor: Colors.white,
             scaffoldBackgroundColor: Colors.white),

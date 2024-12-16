@@ -63,7 +63,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
     try {
       await ref
           .read(authProvider.notifier)
-          .signUp(_emailController, _passwordController);
+          .signUp(_emailController, _passwordController, _fullNameController);
       userID = ref.read(authProvider);
       setState(() {
         authError = false;

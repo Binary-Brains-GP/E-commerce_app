@@ -5,22 +5,14 @@ class CartContentProvider extends StateNotifier<List<Clothes>> {
   CartContentProvider() : super([]);
 
   void addToCart(Clothes cloth) {
-    print("entered add to cart");
     final isExist = state.contains(cloth);
     // print(state[0].name);
-    print('is Exist statement: $isExist');
     if (isExist) {
-      print('If-------------------------------');
       cloth.cartQuantity += 1;
     } else {
-      print('else--------------------------------');
       cloth.cartQuantity += 1;
-      print('add quantity-----------------');
       state = [...state, cloth];
-      print('add to state');
     }
-
-    print(state[0].cartQuantity);
   }
   //----------------IMPORTANT NOTE FOR RAMY-----------------------------------------------
   /*This function will return true as long as the item is in the cart,

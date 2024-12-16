@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileproject/core/helpers/providers/clothes_provider.dart';
-import 'package:mobileproject/features/home/ui/widgets/cloth_card.dart'; // Import the ClothesProvider class
+import 'package:mobileproject/features/home/ui/widgets/cloth_card.dart';
 
 class ClothesScreen extends ConsumerStatefulWidget {
   const ClothesScreen({super.key, required this.collection});
@@ -43,7 +43,8 @@ class _ClothesScreenState extends ConsumerState<ClothesScreen> {
             ),
             itemCount: clothesData.length,
             itemBuilder: (context, index) {
-              return ClothCard(cloth: clothesData[index]);
+              return ClothCard(
+                  cloth: clothesData[index], category: widget.collection);
             },
           );
         },
