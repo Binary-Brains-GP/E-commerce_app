@@ -6,7 +6,7 @@ import 'package:mobileproject/features/home/ui/widgets/build_summary_row.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
-
+  
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
 }

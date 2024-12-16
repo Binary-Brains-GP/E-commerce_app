@@ -33,6 +33,7 @@ class _ClothDetailsScreenState extends ConsumerState<ClothDetailsScreen> {
   void onTapAddBtn() {
     widget.cloth.size = selectedSize.toString();
     ref.read(cartContentProvider.notifier).addToCart(widget.cloth);
+    print("product added to car-----------1");
   }
 
   void _onTapDeleteProduct() {

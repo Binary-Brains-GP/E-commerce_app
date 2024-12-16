@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:mobileproject/core/models/cart_item.dart';
-import 'package:mobileproject/features/home/ui/sub_screen/cart_screen.dart';
+import 'package:mobileproject/core/models/clothes.dart';
 
 class CartItemWidget extends StatelessWidget {
-  final CartItem item;
+  final Clothes item;
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
+  final VoidCallback onRemove;
 
-  const CartItemWidget({super.key, 
+  const CartItemWidget({
+    super.key,
     required this.item,
     required this.onIncrement,
     required this.onDecrement,
+    required this.onRemove,
   });
 
   @override
@@ -37,7 +39,8 @@ class CartItemWidget extends StatelessWidget {
               children: [
                 Text(
                   item.name,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 14),
                 ),
                 Text(
                   "Size ${item.size}",
@@ -46,7 +49,8 @@ class CartItemWidget extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   "\$${item.price}",
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -57,7 +61,7 @@ class CartItemWidget extends StatelessWidget {
                 icon: const Icon(Icons.remove),
                 onPressed: onDecrement,
               ),
-              Text("${item.quantity}",
+              Text("${item.cartQuantity}",
                   style: const TextStyle(fontWeight: FontWeight.bold)),
               IconButton(
                 icon: const Icon(Icons.add),
@@ -66,7 +70,13 @@ class CartItemWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(width: 8),
-          const Icon(Icons.delete_outline, color: Colors.red),
+          IconButton(
+            onPressed: onRemove,
+            icon: const Icon(
+              Icons.delete_outline,
+              color: Colors.red,
+            ),
+          ),
         ],
       ),
     );

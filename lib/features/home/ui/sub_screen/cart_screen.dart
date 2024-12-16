@@ -1,7 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobileproject/core/models/cart_item.dart';
+import 'package:mobileproject/core/helpers/providers/cart_content_provider.dart';
+import 'package:mobileproject/core/models/clothes.dart';
 import 'package:mobileproject/core/routing/routes.dart';
 import 'package:mobileproject/core/theming/colors.dart';
 import 'package:mobileproject/core/theming/styles.dart';
@@ -10,41 +11,45 @@ import 'package:mobileproject/features/home/ui/widgets/build_empty_cart.dart';
 import 'package:mobileproject/features/home/ui/widgets/build_summary_row.dart';
 import 'package:mobileproject/features/home/ui/widgets/cart_card.dart';
 
-class CartScreen extends StatefulWidget {
+class CartScreen extends ConsumerStatefulWidget {
   const CartScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
+  ConsumerState<CartScreen> createState() => _CartScreenState();
 }
 
-class _CartScreenState extends State<CartScreen> {
-  final List<CartItem> cartItems = [
-    CartItem(name: "Regular Fit Slogan", size: "L", price: 1190, quantity: 2),
-    CartItem(name: "Regular Fit Polo", size: "M", price: 1100, quantity: 1),
-    // CartItem(name: "Regular Fit Black", size: "L", price: 1290, quantity: 1),
-  ];
+class _CartScreenState extends ConsumerState<CartScreen> {
+  List<Clothes> cartItems = [];
+  bool isExist = false;
 
-  double shippingFee = 80;
-
+  final double shippingFee = 80;
   double get subtotal =>
-      cartItems.fold(0, (sum, item) => sum + item.price * item.quantity);
+      cartItems.fold(0, (sum, item) => sum + item.price * item.cartQuantity);
 
   double get total => subtotal + shippingFee;
 
-  void incrementQuantity(int index) {
+  void incrementQuantity(Clothes cloth) {
     setState(() {
-      cartItems[index].quantity++;
+      ref.watch(cartContentProvider.notifier).addToCart(cloth);
     });
   }
 
-  void decrementQuantity(int index) {
+  void decrementQuantity(Clothes cloth) {
     setState(() {
-      if (cartItems[index].quantity > 1) cartItems[index].quantity--;
+      isExist =
+          ref.watch(cartContentProvider.notifier).decreamentQuantity(cloth);
+    });
+  }
+
+  void removeProduct(Clothes cloth) {
+    setState(() {
+      ref.watch(cartContentProvider.notifier).removeFromCart(cloth);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    cartItems = ref.watch(cartContentProvider);
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
@@ -53,15 +58,8 @@ class _CartScreenState extends State<CartScreen> {
           style: MyTextStyle.font24BlackBold,
         ),
         backgroundColor: Colors.white,
-        // foregroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
-        // leading: IconButton(
-        //   icon: const Icon(Icons.arrow_back),
-        //   onPressed: () {
-        //     Navigator.pop(context); // Navigate back
-        // },
-        // ),
       ),
       body: cartItems.isEmpty
           ? buildEmptyCart()
@@ -73,8 +71,9 @@ class _CartScreenState extends State<CartScreen> {
                     itemBuilder: (context, index) {
                       return CartItemWidget(
                         item: cartItems[index],
-                        onIncrement: () => incrementQuantity(index),
-                        onDecrement: () => decrementQuantity(index),
+                        onIncrement: () => incrementQuantity(cartItems[index]),
+                        onDecrement: () => decrementQuantity(cartItems[index]),
+                        onRemove: () => removeProduct(cartItems[index]),
                       );
                     },
                   ),
