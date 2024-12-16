@@ -10,14 +10,10 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         backgroundColor: Colors.white,
-        title: Center(child: Text("Account")),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: Icon(Icons.notifications_none),
-          )
-        ],
+        title: Center(child: Text("Account",style: MyTextStyle.font24BlackBold,)),
       ),
       body: Container(
         padding: EdgeInsets.all(16),
@@ -39,17 +35,17 @@ class AccountScreen extends StatelessWidget {
           ),
           const Divider(color: Colors.black12,),
           ListTile(
-            leading: const Icon(Icons.home_outlined, color: MyColors.myBlack),
-            title:  Text('Address Book',style: MyTextStyle.font18LightBlackRegular,),
+            leading: const Icon(Icons.feedback_outlined, color: MyColors.myBlack),
+            title:  Text('Users Feedback',style: MyTextStyle.font18LightBlackRegular,),
             trailing: const Icon(Icons.arrow_back_ios_new_outlined,textDirection: TextDirection.rtl,color: MyColors.myBlack,),
-            onTap: () {},
+            onTap: () {Navigator.pushNamed(context, Routes.usersFeedBack);},
           ),
           const Divider(color: Colors.black12,),
           ListTile(
-            leading: const Icon(Icons.credit_card, color: MyColors.myBlack),
-            title:  Text('Payment Methods',style: MyTextStyle.font18LightBlackRegular,),
+            leading: const Icon(Icons.attach_money_outlined, color: MyColors.myBlack),
+            title:  Text('Users Transactions',style: MyTextStyle.font18LightBlackRegular,),
             trailing: const Icon(Icons.arrow_back_ios_new_outlined,textDirection: TextDirection.rtl,color: MyColors.myBlack,),
-            onTap: () {},
+            onTap: () {Navigator.pushNamed(context, Routes.usersTransactions);},
           ),
           const Divider(color: Colors.black12,),
           ListTile(

@@ -144,6 +144,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          centerTitle: true,
           backgroundColor: Colors.white,
           title: const Text(
             'Discover',

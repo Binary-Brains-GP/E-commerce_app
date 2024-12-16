@@ -15,4 +15,7 @@ class Routes {
   static const String helpCenterScreen ='/helpCenterScreen';
   static const String clothDetailsScreen ='/lothDetailsScreen';
   static const String checkoutScreen ='/checkout';
+  static const String usersTransactions ='/usersTransactions';
+  static const String usersFeedBack ='/usersFeedBack';
+
 }

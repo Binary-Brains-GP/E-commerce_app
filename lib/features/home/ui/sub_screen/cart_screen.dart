@@ -56,6 +56,8 @@ class _CartScreenState extends ConsumerState<CartScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         title: Text(
           "My Cart",
           style: MyTextStyle.font24BlackBold,
@@ -63,7 +65,6 @@ class _CartScreenState extends ConsumerState<CartScreen> {
         backgroundColor: Colors.white,
         // foregroundColor: Colors.black,
         elevation: 0,
-        centerTitle: true,
         // leading: IconButton(
         //   icon: const Icon(Icons.arrow_back),
         //   onPressed: () {
