@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:mobileproject/core/routing/routes.dart';
+import 'package:mobileproject/features/checkout/checkout_screen.dart';
 
 import '../../features/forgot_password/ui/forgot_password_screen.dart';
 import '../../features/forgot_password/ui/new_password_screen.dart';
@@ -36,9 +36,11 @@ class AppRouter {
       case Routes.forgotPasswordScreen:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
       case Routes.newPasswordScreen:
-        // return MaterialPageRoute(builder: (_) => const NewPasswordScreen());
+      // return MaterialPageRoute(builder: (_) => const NewPasswordScreen());
       case Routes.verifyScreen:
-        // return MaterialPageRoute(builder: (_) => const VerifyScreen());
+      // return MaterialPageRoute(builder: (_) => const VerifyScreen());
+      case Routes.checkoutScreen:
+        return MaterialPageRoute(builder: (_) => const CheckoutScreen());
       default:
         return null;
     }

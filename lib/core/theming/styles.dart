@@ -4,6 +4,12 @@ import 'colors.dart';
 
 class MyTextStyle {
   //her we add out custom fonts even if we gonna use it once (:
+  static TextStyle font24BlackBold = TextStyle(
+    fontSize: 24.sp,
+    fontFamily: "poppins",
+    fontWeight: FontWeight.bold,
+    color: Color.fromARGB(255, 26, 26, 26),
+  );
   static TextStyle font24LightPurpleBold = TextStyle(
     fontSize: 24.sp,
     fontFamily: "poppins",
@@ -78,6 +84,10 @@ class MyTextStyle {
   );
   static TextStyle font16WhiteRegular = TextStyle(
     fontSize: 16.sp,
+    fontFamily: "poppins",
+    color: Colors.white,
+  );static TextStyle font14WhiteRegular = TextStyle(
+    fontSize: 14.sp,
     fontFamily: "poppins",
     color: Colors.white,
   );
