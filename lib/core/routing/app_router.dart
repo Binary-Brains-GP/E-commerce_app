@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:mobileproject/core/routing/routes.dart';
 import 'package:mobileproject/features/account/widgets/faqs_screen.dart';
@@ -9,6 +8,7 @@ import 'package:mobileproject/features/account/widgets/notification_screen.dart'
 import 'package:mobileproject/features/checkout/checkout_screen.dart';
 import 'package:mobileproject/features/home/ui/sub_screen/cloth_details_screen.dart';
 import 'package:mobileproject/features/onboarding/ui/onboarding_screen.dart';
+import 'package:mobileproject/features/checkout/checkout_screen.dart';
 
 import '../../features/forgot_password/ui/forgot_password_screen.dart';
 import '../../features/login/ui/login_screen.dart';
