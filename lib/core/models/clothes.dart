@@ -13,6 +13,7 @@ class Clothes {
   final double price;
   final String? imagePath;
   int quantity;
+  int? sellQuantity;
   int cartQuantity;
   String category;
   String size = "small";
@@ -27,6 +28,7 @@ class Clothes {
     required this.price,
     required this.quantity,
     required this.category,
+    this.sellQuantity,
     this.feedback,
     this.rate,
     this.status,
