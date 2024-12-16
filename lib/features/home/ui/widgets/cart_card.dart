@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobileproject/core/models/cart_item.dart';
+import 'package:mobileproject/core/models/clothes.dart';
 import 'package:mobileproject/features/home/ui/sub_screen/cart_screen.dart';
 
 class CartItemWidget extends StatelessWidget {
-  final CartItem item;
+  final Clothes item;
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
 

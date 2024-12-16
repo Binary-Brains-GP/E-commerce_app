@@ -43,7 +43,7 @@ class AppRouter {
       case Routes.myFAQsScreen:
         return MaterialPageRoute(builder: (_) => const FaqsScreen());
       case Routes.notificationScreen:
-        return MaterialPageRoute(builder: (_) =>  NotificationScreen());
+        return MaterialPageRoute(builder: (_) =>  const NotificationScreen());
       case Routes.myDetailsScreen:
         return MaterialPageRoute(builder: (_) => const MyDetailsScreen());
       case Routes.myOrdersScreen:
