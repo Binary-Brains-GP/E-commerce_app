@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:mobileproject/core/routing/routes.dart';
 import 'package:mobileproject/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobileproject/core/widgets/app_text_btn.dart';
+import 'package:mobileproject/features/account/ui/my_orders_screen.dart';
 import 'package:mobileproject/features/home/ui/widgets/build_summary_row.dart';
 
 class CheckoutScreen extends StatefulWidget {
-  const CheckoutScreen({super.key});
+  const CheckoutScreen({
+    super.key,
+    required this.shippingFee,
+    required this.subTotal,
+    required this.total,
+    required this.vat,
+  });
+  final double subTotal;
+  final double vat;
+  final double shippingFee;
+  final double total;
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -14,11 +26,6 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
-    // Provide default values if arguments are null
-    const double subTotal = 0.0;
-    const double vat = 0.0;
-    const double shippingFee = 0.0;
-    const double total = subTotal + vat + shippingFee;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -104,12 +111,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10.h),
-              buildSummaryRow("Sub-total", "\$${subTotal.toStringAsFixed(2)}"),
-              buildSummaryRow("VAT (%)", "\$0.00"),
               buildSummaryRow(
-                  "Shipping fee", "\$${shippingFee.toStringAsFixed(2)}"),
+                  "Sub-total", "\$${widget.subTotal.toStringAsFixed(2)}"),
+              buildSummaryRow("VAT (%)", "%${widget.vat}"),
+              buildSummaryRow(
+                  "Shipping fee", "\$${widget.shippingFee.toStringAsFixed(2)}"),
               const Divider(thickness: 1),
-              buildSummaryRow("Total", "\$${total.toStringAsFixed(2)}",
+              buildSummaryRow("Total", "\$${widget.total.toStringAsFixed(2)}",
                   isBold: true),
 
               const SizedBox(height: 20),
@@ -148,7 +156,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               Center(
                 child: AppTextBtn(
                   textStyle: MyTextStyle.font16WhiteRegular,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const MyOrdersScreen(),
+                    ));
+                  },
                   buttonText: "Place Order",
                   buttonWidth: 340.w,
                   buttonHeight: 55.h,

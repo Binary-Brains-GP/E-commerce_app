@@ -1,48 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobileproject/core/helpers/providers/cart_content_provider.dart';
+import 'package:mobileproject/core/models/clothes.dart';
 import 'package:mobileproject/core/theming/colors.dart';
 import 'package:mobileproject/core/theming/styles.dart';
 import 'package:mobileproject/core/widgets/app_text_btn.dart';
 import 'package:mobileproject/features/account/widgets/leave_review_sheet.dart';
 import 'package:mobileproject/features/account/widgets/order_card.dart';
 
-class MyOrdersScreen extends StatefulWidget {
+class MyOrdersScreen extends ConsumerStatefulWidget {
   const MyOrdersScreen({super.key});
 
   @override
-  State<MyOrdersScreen> createState() => _MyOrdersScreenState();
+  ConsumerState<MyOrdersScreen> createState() => _MyOrdersScreenState();
 }
 
-class _MyOrdersScreenState extends State<MyOrdersScreen> {
+class _MyOrdersScreenState extends ConsumerState<MyOrdersScreen> {
   // To track the selected button
   bool isOngoingSelected = true;
-  void _showLeaveReviewSheet(BuildContext context) {
+  List<Clothes> cartItems = [];
+  void _showLeaveReviewSheet(BuildContext context, Clothes cloth) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (context) => LeaveReviewSheet(), // Review sheet widget
+      builder: (context) => LeaveReviewSheet(
+        cloth: cloth,
+      ), // Review sheet widget
     );
   }
+
   @override
   Widget build(BuildContext context) {
+    void onTapBack() {
+      ref.watch(cartContentProvider.notifier).addListToUser();
+    }
+    cartItems = ref.watch(cartContentProvider);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
           "My Orders",
           style: MyTextStyle.font22BlackSemiBold,
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications_none)),
-          SizedBox(
+          IconButton(
+              onPressed: () {}, icon: const Icon(Icons.notifications_none)),
+          const SizedBox(
             width: 15,
           )
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(25),
+        padding: const EdgeInsets.all(25),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -99,18 +112,45 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            OrderCard(
-              title: "Leather Jacket",
-              size: "L",
-              imageUrl: "",
-              onTrackOrder: () {
-                _showLeaveReviewSheet(context); // Open review sheet here
-              },              price: "30",
-              status: "Complete",
-            ),
+            if (isOngoingSelected == false)
+              Expanded(
+                child: ListView.builder(
+                  itemCount: cartItems.length,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: OrderCard(
+                      isOngoingSelected: isOngoingSelected,
+                      cloth: cartItems[index],
+                      onTrackOrder: () {
+                        _showLeaveReviewSheet(
+                          context,
+                          cartItems[index],
+                        ); // Open review sheet here
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            if (isOngoingSelected)
+              OrderCard(
+                  isOngoingSelected: isOngoingSelected,
+                  cloth: Clothes(
+                      uID: ' 1IQufHFpQbAevti69LcA ',
+                      name: 'Denim Jacket',
+                      description: "Classic denim jacket perfect for layering.",
+                      price: 70,
+                      quantity: 5,
+                      category: 'women',
+                      imagePath: 'assets/images/Denim Jacket.jpg'),
+                  onTrackOrder: () {}),
+            AppTextBtn(
+              buttonText: 'Back to home',
+              textStyle: const TextStyle(color: Colors.white, fontSize: 19),
+              onPressed: onTapBack,
+            )
           ],
         ),
       ),

@@ -13,11 +13,12 @@ class Clothes {
   final double price;
   final String? imagePath;
   int quantity;
+  int? sellQuantity;
   int cartQuantity;
   String category;
   String size = "small";
   String? feedback;
-  double? rate;
+  int? rate;
   String? status;
 
   Clothes({
@@ -27,6 +28,7 @@ class Clothes {
     required this.price,
     required this.quantity,
     required this.category,
+    this.sellQuantity,
     this.feedback,
     this.rate,
     this.status,
@@ -73,5 +75,14 @@ class Clothes {
       quantity: doc['quantity'] ?? 0,
       category: category,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'price': price,
+      'feedback': feedback,
+      'rate': rate,
+    };
   }
 }
