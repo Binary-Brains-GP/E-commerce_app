@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:searchfield/searchfield.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+
 import 'package:mobileproject/core/helpers/providers/all_clothes_provider.dart';
 import 'package:mobileproject/core/models/clothes.dart';
 import 'package:mobileproject/features/home/ui/sub_screen/clothes_screen.dart';
 import 'package:mobileproject/features/home/ui/widgets/cloth_card.dart';
-import 'package:searchfield/searchfield.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
