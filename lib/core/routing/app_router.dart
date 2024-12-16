@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:mobileproject/core/routing/routes.dart';
 import 'package:mobileproject/features/account/widgets/faqs_screen.dart';
@@ -8,6 +7,7 @@ import 'package:mobileproject/features/account/widgets/my_orders_screen.dart';
 import 'package:mobileproject/features/account/widgets/notification_screen.dart';
 import 'package:mobileproject/features/home/ui/sub_screen/cloth_details_screen.dart';
 import 'package:mobileproject/features/onboarding/ui/onboarding_screen.dart';
+import 'package:mobileproject/features/checkout/checkout_screen.dart';
 
 import '../../features/forgot_password/ui/forgot_password_screen.dart';
 import '../../features/login/ui/login_screen.dart';
@@ -37,16 +37,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
       case Routes.forgotPasswordScreen:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
-      case Routes.helpCenterScreen:
-        return MaterialPageRoute(builder: (_) => const HelpCenterScreen());
-      case Routes.myFAQsScreen:
-        return MaterialPageRoute(builder: (_) => const FaqsScreen());
-      case Routes.notificationScreen:
-        return MaterialPageRoute(builder: (_) =>  NotificationScreen());
-      case Routes.myDetailsScreen:
-        return MaterialPageRoute(builder: (_) => const MyDetailsScreen());
-      case Routes.myOrdersScreen:
-        return MaterialPageRoute(builder: (_) => const MyOrdersScreen());
+      case Routes.newPasswordScreen:
+        // return MaterialPageRoute(builder: (_) => const NewPasswordScreen());
+      case Routes.verifyScreen:
+        // return MaterialPageRoute(builder: (_) => const VerifyScreen());
       default:
         return null;
     }

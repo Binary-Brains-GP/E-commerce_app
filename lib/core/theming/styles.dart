@@ -27,6 +27,11 @@ class MyTextStyle {
       fontFamily: "poppins",
       fontWeight: FontWeight.bold,
       color: Colors.black);
+  static TextStyle font24BlackBold = TextStyle(
+      fontSize: 32.sp,
+      fontFamily: "poppins",
+      fontWeight: FontWeight.bold,
+      color: Colors.black);
   static TextStyle font16GrayRegular = TextStyle(
     fontSize: 16.sp,
     fontFamily: "poppins",
@@ -50,6 +55,11 @@ class MyTextStyle {
   );
   static TextStyle font16WhiteRegular = TextStyle(
     fontSize: 16.sp,
+    fontFamily: "poppins",
+    color: Colors.white,
+  );
+  static TextStyle font14WhiteRegular = TextStyle(
+    fontSize: 14.sp,
     fontFamily: "poppins",
     color: Colors.white,
   );
