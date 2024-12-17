@@ -99,6 +99,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => CheckoutScreen(
+                                orderedItems: cartItems,
                                 shippingFee: shippingFee,
                                 subTotal: subTotal,
                                 total: total,
