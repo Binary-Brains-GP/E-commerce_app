@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobileproject/core/helpers/providers/auth_provider.dart';
+import 'package:mobileproject/core/helpers/providers/cart_content_provider.dart';
+import 'package:mobileproject/core/helpers/providers/privileges_provider.dart';
+import 'package:mobileproject/core/helpers/providers/transaction_provider.dart';
+import 'package:mobileproject/core/models/clothes.dart';
 import 'package:mobileproject/core/routing/routes.dart';
 import 'package:mobileproject/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,26 +12,42 @@ import 'package:mobileproject/core/widgets/app_text_btn.dart';
 import 'package:mobileproject/features/account/ui/my_orders_screen.dart';
 import 'package:mobileproject/features/home/ui/widgets/build_summary_row.dart';
 
-class CheckoutScreen extends StatefulWidget {
+class CheckoutScreen extends ConsumerStatefulWidget {
   const CheckoutScreen({
     super.key,
     required this.shippingFee,
     required this.subTotal,
     required this.total,
     required this.vat,
+    required this.orderedItems,
   });
   final double subTotal;
   final double vat;
   final double shippingFee;
   final double total;
+  final List<Clothes> orderedItems;
 
   @override
-  State<CheckoutScreen> createState() => _CheckoutScreenState();
+  ConsumerState<CheckoutScreen> createState() => _CheckoutScreenState();
 }
 
-class _CheckoutScreenState extends State<CheckoutScreen> {
+class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
+    void onTapPlaceOrder() {
+      ref.watch(cartContentProvider.notifier).addListToUser();
+      final String userName = ref.watch(privilegesProvider).valueOrNull!.name;
+      ref
+          .watch(transactionProvider.notifier)
+          .addTransaction(userName, widget.total, widget.orderedItems);
+
+      ref.watch(transactionProvider.notifier).addListToUser();
+      //-------------------------------------------------------------
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const MyOrdersScreen(),
+      ));
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -156,11 +178,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               Center(
                 child: AppTextBtn(
                   textStyle: MyTextStyle.font16WhiteRegular,
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const MyOrdersScreen(),
-                    ));
-                  },
+                  onPressed: onTapPlaceOrder,
                   buttonText: "Place Order",
                   buttonWidth: 340.w,
                   buttonHeight: 55.h,

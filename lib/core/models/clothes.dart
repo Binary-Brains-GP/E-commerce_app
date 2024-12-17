@@ -80,6 +80,7 @@ class Clothes {
   Map<String, dynamic> toMap() {
     return {
       'name': name,
+      'quantity': cartQuantity,
       'price': price,
       'feedback': feedback,
       'rate': rate,
