@@ -6,6 +6,7 @@ import '../theming/colors.dart';
 class AppTextBtn extends StatelessWidget {
   final double? borderRadius;
   final Color? backGroundColor;
+  final Color? borderColor; // Added borderColor as an optional parameter
   final double? horizontalPadding;
   final double? verticalPadding;
   final double? buttonWidth;
@@ -13,17 +14,19 @@ class AppTextBtn extends StatelessWidget {
   final String buttonText;
   final TextStyle textStyle;
 
-  const AppTextBtn(
-      {this.borderRadius,
-        this.backGroundColor,
-        this.horizontalPadding,
-        this.verticalPadding,
-        this.buttonWidth,
-        this.buttonHeight,
-        required this.buttonText,
-        required this.textStyle,
-        required this.onPressed,
-        super.key});
+  const AppTextBtn({
+    this.borderRadius,
+    this.backGroundColor,
+    this.borderColor, // New parameter
+    this.horizontalPadding,
+    this.verticalPadding,
+    this.buttonWidth,
+    this.buttonHeight,
+    required this.buttonText,
+    required this.textStyle,
+    required this.onPressed,
+    super.key,
+  });
 
   final VoidCallback onPressed;
 
@@ -36,6 +39,9 @@ class AppTextBtn extends StatelessWidget {
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius ?? 10.0),
+            side: borderColor != null // Conditionally add border color
+                ? BorderSide(color: borderColor!)
+                : BorderSide.none,
           ),
         ),
         backgroundColor:

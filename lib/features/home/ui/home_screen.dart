@@ -172,21 +172,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   size: 40,
                   color: Colors.black,
                 ),
-              ),IconButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    useSafeArea: true,
-                    isScrollControlled: true,
-                    context: context,
-                    builder: (context) => const BestSelling(),
-                  );
-                },
-                icon: const Icon(
-                  Icons.pie_chart_outline,
-                  size: 40,
-                  color: Colors.black,
-                ),
-              ),
+              )
           ],
         ),
         body: Container(
