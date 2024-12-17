@@ -39,7 +39,7 @@ class _ClothDetailsScreenState extends ConsumerState<ClothDetailsScreen> {
     print('--------------${widget.cloth.category}');
     ref
         .watch(allClothesProvider.notifier)
-        .deleteCloth(widget.cloth.category, widget.cloth.uID);
+        .deleteCloth(widget.cloth.category!, widget.cloth.uID!);
     Navigator.of(context).pop();
     if (widget.category == "all") {
       ref.watch(clothesProvider.notifier).getAllProducts();
@@ -88,7 +88,7 @@ class _ClothDetailsScreenState extends ConsumerState<ClothDetailsScreen> {
               height: 10.h,
             ),
             Text(
-              widget.cloth.description,
+              widget.cloth.description!,
               style: const TextStyle(color: Colors.grey),
             ),
             SizedBox(

@@ -27,8 +27,8 @@ class _EditClothState extends ConsumerState<EditCloth> {
 
   void _onTapEdit() {
     final updatedCloth = ref.watch(clothesProvider.notifier).editProduct(
-          widget.cloth.category,
-          widget.cloth.uID,
+          widget.cloth.category!,
+          widget.cloth.uID!,
           name: _nameController.text,
           price: double.tryParse(_priceController.text),
           quantity: int.tryParse(_quantityController.text),
@@ -107,7 +107,7 @@ class _EditClothState extends ConsumerState<EditCloth> {
                         ),
                       ),
                       Text(
-                        widget.cloth.category,
+                        widget.cloth.category!,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 20.sp,

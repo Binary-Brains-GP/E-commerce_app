@@ -1,99 +1,99 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobileproject/core/models/transaction_model.dart';
 import 'package:mobileproject/core/theming/styles.dart';
 import 'package:mobileproject/core/widgets/app_text_btn.dart';
 
-class TransactionsScreen extends ConsumerStatefulWidget {
+class TransactionsScreen extends StatefulWidget {
+  final List<Transactions> transactions;
+
   // Constructor to accept the list of transactions
-  const TransactionsScreen({super.key});
+  TransactionsScreen({required this.transactions});
 
   @override
-  ConsumerState createState() => _TransactionsScreenState();
+  _TransactionsScreenState createState() => _TransactionsScreenState();
 }
 
-class _TransactionsScreenState extends ConsumerState<TransactionsScreen> {
+class _TransactionsScreenState extends State<TransactionsScreen> {
   DateTime? selectedDate;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  List<Transactions> allTransactions = [];
-
-  Future<void> fetchAllCartItems() async {
-    QuerySnapshot usersSnapshot =
-    await _firestore.collection('users').get(); // Fetch all users
-    List tempCartItems = [];
-
-    for (var userDoc in usersSnapshot.docs) {
-      // Safely check if 'cartItems' exists and is a list
-      if (userDoc.data() is Map<String, dynamic> &&
-          (userDoc.data() as Map<String, dynamic>).containsKey('cartItems')) {
-        final userCartItems = userDoc['cartItems'];
-        if (userCartItems is List) {
-          tempCartItems.addAll(userCartItems);
-        }
-      }
-    }
-
-    setState(() {
-      allTransactions = allTransactions;
-    });
-  }
-  Future<void> fetchUsersAndTransactions() async {
-    // Reference to users collection
-    CollectionReference usersCollection =
-    FirebaseFirestore.instance.collection('users');
-
-    try {
-      // Fetch all users
-      QuerySnapshot usersSnapshot = await usersCollection.get();
-
-      for (var userDoc in usersSnapshot.docs) {
-        String userName = userDoc['name'] ?? 'No Name';
-        print("User: $userName");
-
-        // Attempt to fetch transactions as a subcollection
-        CollectionReference transactionsCollection =
-        userDoc.reference.collection('transactions');
-        QuerySnapshot transactionsSnapshot = await transactionsCollection.get();
-
-        if (transactionsSnapshot.docs.isNotEmpty) {
-          for (var transactionDoc in transactionsSnapshot.docs) {
-            int amount = transactionDoc['amount'] ?? 0;
-            String date = transactionDoc['date'] ?? 'No Date';
-            print("  Transaction - Amount: $amount, Date: $date");
-
-            // Fetch orderedItems list
-            List orderedItems = transactionDoc['orderedItems'] ?? [];
-            for (var item in orderedItems) {
-              int quantity = item['quantity'] ?? 0;
-              double price = item['price']?.toDouble() ?? 0.0;
-              print("    Item - Quantity: $quantity, Price: $price");
-            }
-          }
-        } else {
-          print("  No transactions found for $userName.");
-        }
-      }
-    } catch (e) {
-      print("Error: $e");
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchUsersAndTransactions();
-  }
 
   @override
   Widget build(BuildContext context) {
+    // Filter transactions based on the selected date
+    final filteredTransactions = selectedDate == null
+        ? []
+        : widget.transactions.where((tx) {
+      final txDate = tx.date.toLocal();  // Get the date without time
+      return txDate.year == selectedDate!.year &&
+          txDate.month == selectedDate!.month &&
+          txDate.day == selectedDate!.day;
+    }).toList();
 
+print(filteredTransactions);
     return Column(
       children: [
-
-      ]
+        // Date Picker Section
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: AppTextBtn(
+              buttonWidth: double.maxFinite,
+              buttonText: selectedDate == null
+                  ? "Select a Date"
+                  : "Selected: ${selectedDate!.toLocal()}".split(' ')[1],
+              textStyle: MyTextStyle.font18WhiteRegular,
+              onPressed: () async {
+                final pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime.now(),
+                );
+                if (pickedDate != null) {
+                  setState(() {
+                    selectedDate = pickedDate;
+                  });
+                }
+              }),
+        ),
+        // Transactions List
+        Expanded(
+          child: filteredTransactions.isEmpty
+              ? Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.hourglass_empty_rounded,size: 200,),
+                SizedBox(height: 16,),
+                Text(
+                  "No transactions \nfor the selected day.",textAlign: TextAlign.center,
+                  style: MyTextStyle.font26BlackBold,
+                ),
+              ],
+            ),
+          )
+              : ListView.builder(
+            itemCount: filteredTransactions.length,
+            itemBuilder: (ctx, index) {
+              final userTrans = filteredTransactions[index];
+              return Card(
+                elevation: 2,
+                color: Colors.white,
+                margin: EdgeInsets.symmetric(
+                  vertical: 5,
+                  horizontal: 10,
+                ),
+                child: ListTile(
+                  title: Text(userTrans.user),
+                  subtitle:
+                  Text("Amount: \$${userTrans.amount.toStringAsFixed(2)}"),
+                  trailing: Text(
+                    "${userTrans.date.toLocal()}".split(' ')[0],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
