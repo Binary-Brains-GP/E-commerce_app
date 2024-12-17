@@ -52,6 +52,7 @@ class Clothes {
       description: description,
       quantity: quantity,
       category: category ?? this.category,
+      imagePath: imagePath,
     );
   }
 
@@ -60,7 +61,6 @@ class Clothes {
       Map<String, dynamic> doc, String docId, String category) async {
     final imageName = doc['name'] ?? 'default_image';
     final imagePath = 'assets/images/$imageName.jpg';
-
     final imageExistsInAssets = await imageExists(imagePath);
 
     final resolvedImagePath =

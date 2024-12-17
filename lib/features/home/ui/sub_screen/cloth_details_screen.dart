@@ -5,6 +5,7 @@ import 'package:mobileproject/core/helpers/providers/all_clothes_provider.dart';
 import 'package:mobileproject/core/helpers/providers/cart_content_provider.dart';
 import 'package:mobileproject/core/helpers/providers/clothes_provider.dart';
 import 'package:mobileproject/core/helpers/providers/privileges_provider.dart';
+import 'package:mobileproject/core/helpers/providers/single_cloth_provider.dart';
 import 'package:mobileproject/core/models/clothes.dart';
 import 'package:mobileproject/core/widgets/app_text_btn.dart';
 import 'package:mobileproject/features/home/ui/sub_screen/Admin/edit_cloth.dart';

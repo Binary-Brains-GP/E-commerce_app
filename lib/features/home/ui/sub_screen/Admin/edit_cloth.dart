@@ -26,19 +26,27 @@ class _EditClothState extends ConsumerState<EditCloth> {
   }
 
   void _onTapEdit() {
-    final updatedCloth = ref.watch(clothesProvider.notifier).editProduct(
+    ref.watch(clothesProvider.notifier).editProduct(
           widget.cloth.category,
           widget.cloth.uID,
           name: _nameController.text,
           price: double.tryParse(_priceController.text),
           quantity: int.tryParse(_quantityController.text),
         );
-    // setState(() {
-    //   ref
-    //       .watch(clothesProvider.notifier)
-    //       .fetchSingleCloth(widget.cloth.uID, widget.cloth.category);
-    // });
+
     Navigator.of(context).pop();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future(
+      () {
+        ref
+            .watch(clothesProvider.notifier).getAllProducts();
+            
+      },
+    );
   }
 
   @override
