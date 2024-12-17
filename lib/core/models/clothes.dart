@@ -7,27 +7,27 @@ enum Category {
 }
 
 class Clothes {
-  final String uID;
+   String? uID;
   final String name;
-  final String description;
+  final String ?description;
   final double price;
   final String? imagePath;
   int quantity;
   int? sellQuantity;
   int cartQuantity;
-  String category;
+  String? category;
   String size = "small";
   String? feedback;
   int? rate;
   String? status;
 
   Clothes({
-    required this.uID,
+     this.uID,
     required this.name,
-    required this.description,
+     this.description,
     required this.price,
     required this.quantity,
-    required this.category,
+     this.category,
     this.sellQuantity,
     this.feedback,
     this.rate,

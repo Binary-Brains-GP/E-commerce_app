@@ -17,5 +17,7 @@ class Routes {
   static const String checkoutScreen ='/checkout';
   static const String usersTransactions ='/usersTransactions';
   static const String usersFeedBack ='/usersFeedBack';
+  static const String statistics ='/statistics';
+
 
 }

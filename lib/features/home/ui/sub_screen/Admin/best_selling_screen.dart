@@ -2,7 +2,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobileproject/core/theming/styles.dart';
 
 class BestSelling extends ConsumerStatefulWidget {
   const BestSelling({
@@ -22,18 +21,12 @@ class _BestSellingState extends ConsumerState<BestSelling> {
       builder: (context, constraints) {
         return Container(
           padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20), color: Colors.white),
           child: SizedBox(
             height: double.maxFinite,
             width: double.maxFinite,
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Text(
-                    "Best selling items",
-                    style: MyTextStyle.font24BlackBold,
-                  ),
                   const Divider(
                     thickness: 1,
                   ),

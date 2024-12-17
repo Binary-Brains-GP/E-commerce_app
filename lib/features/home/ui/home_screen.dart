@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobileproject/features/home/ui/sub_screen/Admin/best_selling_screen.dart';
 import 'package:searchfield/searchfield.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
@@ -172,21 +171,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   size: 40,
                   color: Colors.black,
                 ),
-              ),IconButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    useSafeArea: true,
-                    isScrollControlled: true,
-                    context: context,
-                    builder: (context) => const BestSelling(),
-                  );
-                },
-                icon: const Icon(
-                  Icons.pie_chart_outline,
-                  size: 40,
-                  color: Colors.black,
-                ),
-              ),
+              )
           ],
         ),
         body: Container(
@@ -315,7 +300,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     children: [
                       ClothCard(
                         cloth: searchedCloth,
-                        category: searchedCloth.category,
+                        category: searchedCloth.category!,
                       )
                     ],
                   ),

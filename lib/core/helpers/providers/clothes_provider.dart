@@ -60,7 +60,7 @@ class ClothesProvider extends StateNotifier<AsyncValue<List<Clothes>>> {
           id: docRef.id,
           category: category,
           name: newCloth.name,
-          description: newCloth.description,
+          description: newCloth.description!,
           price: newCloth.price,
           quantity: newCloth.quantity,
         )
@@ -102,7 +102,7 @@ class ClothesProvider extends StateNotifier<AsyncValue<List<Clothes>>> {
             return cloth.copyWith(
               name: name == ''? cloth.name : name,
               price: price ?? cloth.price,
-              description: description ?? cloth.description,
+              description: description ?? cloth.description!,
               quantity: quantity ?? cloth.quantity,
             );
           }
