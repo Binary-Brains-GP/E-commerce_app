@@ -1,3 +1,4 @@
+
 class User {
   User({
     required this.uID,
@@ -10,7 +11,7 @@ class User {
   final String email;
   final bool isAdmin;
 
-   factory User.fromMap(String uid, Map<String, dynamic> data) {
+  factory User.fromMap(String uid, Map<String, dynamic> data) {
     return User(
       uID: uid,
       name: data['name'] ?? '',

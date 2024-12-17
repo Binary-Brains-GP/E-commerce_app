@@ -34,9 +34,6 @@ class _MyOrdersScreenState extends ConsumerState<MyOrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    void onTapBack() {
-      ref.watch(cartContentProvider.notifier).addListToUser();
-    }
     cartItems = ref.watch(cartContentProvider);
     return Scaffold(
       appBar: AppBar(
@@ -146,11 +143,11 @@ class _MyOrdersScreenState extends ConsumerState<MyOrdersScreen> {
                       category: 'women',
                       imagePath: 'assets/images/Denim Jacket.jpg'),
                   onTrackOrder: () {}),
-            AppTextBtn(
-              buttonText: 'Back to home',
-              textStyle: const TextStyle(color: Colors.white, fontSize: 19),
-              onPressed: onTapBack,
-            )
+            // AppTextBtn(
+            //   buttonText: 'Back to home',
+            //   textStyle: const TextStyle(color: Colors.white, fontSize: 19),
+            //   onPressed: onTapBack,
+            // )
           ],
         ),
       ),

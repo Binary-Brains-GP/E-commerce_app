@@ -13,7 +13,8 @@ class PrivilegesProvider extends AsyncNotifier<User?> {
       state = const AsyncLoading();
 
       // Fetch user data from Firestore
-      final userDoc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      final userDoc =
+          await FirebaseFirestore.instance.collection('users').doc(uid).get();
 
       if (userDoc.exists) {
         final userData = userDoc.data()!;
@@ -24,7 +25,7 @@ class PrivilegesProvider extends AsyncNotifier<User?> {
         state = AsyncError("User not found", StackTrace as StackTrace);
       }
     } catch (e) {
-      state = AsyncError(e, StackTrace as StackTrace);
+      print("Error: $e");
     }
   }
 }

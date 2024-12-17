@@ -18,10 +18,6 @@ class CartContentProvider extends StateNotifier<List<Clothes>> {
     print(cloth.cartQuantity);
   }
 
-  //----------------IMPORTANT NOTE FOR RAMY-----------------------------------------------
-  /*This function will return true as long as the item is in the cart,
-  but when the item's cartQuantity in cart is 1 and the remove button is clicked it returns false
-  and there you should delete it from the UI too --------------------------*/
   bool decreamentQuantity(Clothes cloth) {
     var isExist = state.contains(cloth);
     if (isExist && cloth.cartQuantity == 1) {

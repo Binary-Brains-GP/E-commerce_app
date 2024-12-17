@@ -70,6 +70,7 @@ dependencies:
   searchfield: ^1.2.0
   speech_to_text: ^7.0.0
   fl_chart: ^0.69.2
+  uuid: ^4.5.1
 
 dev_dependencies:
   build_runner: ^2.4.13
