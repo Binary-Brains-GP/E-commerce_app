@@ -148,6 +148,27 @@ class AccountScreen extends StatelessWidget {
                       },
                     ),
                   ],
+                  const Divider(color: Colors.black12,),
+                  ListTile(
+                    leading: const Icon(Icons.notifications_none, color: MyColors.myBlack),
+                    title:  Text('Notifications',style: MyTextStyle.font18LightBlackRegular,),
+                    trailing: const Icon(Icons.arrow_back_ios_new_outlined,textDirection: TextDirection.rtl,color: MyColors.myBlack,),
+                    onTap: () {Navigator.pushNamed(context, Routes.notificationScreen);},
+                  ),
+                  const Divider(color: Colors.black12,),
+                  ListTile(
+                    leading: const Icon(Icons.question_mark_outlined, color: MyColors.myBlack),
+                    title:  Text('FAQs',style: MyTextStyle.font18LightBlackRegular,),
+                    trailing: const Icon(Icons.arrow_back_ios_new_outlined,textDirection: TextDirection.rtl,color: MyColors.myBlack,),
+                    onTap: () {Navigator.pushNamed(context, Routes.myFAQsScreen);},
+                  ),
+                  const Divider(color: Colors.black12,),
+                  ListTile(
+                    leading: const Icon(Icons.headphones, color: MyColors.myBlack),
+                    title:  Text('Help Center',style: MyTextStyle.font18LightBlackRegular,),
+                    trailing: const Icon(Icons.arrow_back_ios_new_outlined,textDirection: TextDirection.rtl,color: MyColors.myBlack,),
+                    onTap: () {Navigator.pushNamed(context, Routes.helpCenterScreen);},
+                  ),
                   const Divider(color: Colors.black12),
                   ListTile(
                     leading: Icon(Icons.logout, color: Colors.red),

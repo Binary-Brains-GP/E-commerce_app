@@ -141,7 +141,7 @@ class _MyOrdersScreenState extends ConsumerState<MyOrdersScreen> {
                       price: 70,
                       quantity: 5,
                       category: 'women',
-                      imagePath: 'assets/images/Denim Jacket.jpg'),
+                      imagePath: 'assets/images/Classic White Shirt.jpg'),
                   onTrackOrder: () {}),
             // AppTextBtn(
             //   buttonText: 'Back to home',
