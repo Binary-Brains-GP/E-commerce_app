@@ -84,7 +84,7 @@ class ClothesProvider extends StateNotifier<AsyncValue<List<Clothes>>> {
       // Create a map of fields to update
       Map<String, dynamic> updatedFields = {};
 
-      if (name != null) updatedFields['name'] = name;
+      if (name != '') updatedFields['name'] = name;
       if (price != null) updatedFields['price'] = price;
       if (description != null) updatedFields['description'] = description;
       if (quantity != null) updatedFields['quantity'] = quantity;
@@ -100,7 +100,7 @@ class ClothesProvider extends StateNotifier<AsyncValue<List<Clothes>>> {
         final updatedList = state.value?.map((cloth) {
           if (cloth.uID == documentId) {
             return cloth.copyWith(
-              name: name ?? cloth.name,
+              name: name == ''? cloth.name : name,
               price: price ?? cloth.price,
               description: description ?? cloth.description!,
               quantity: quantity ?? cloth.quantity,
@@ -112,7 +112,7 @@ class ClothesProvider extends StateNotifier<AsyncValue<List<Clothes>>> {
         state = AsyncValue.data(updatedList ?? []);
       }
     } catch (e, stackTrace) {
-      state = AsyncValue.error(e, stackTrace); // Handle errors
+      print('Error: $e'); // Handle errors
     }
   }
 
@@ -140,7 +140,7 @@ class ClothesProvider extends StateNotifier<AsyncValue<List<Clothes>>> {
       }
     } catch (e, stackTrace) {
       // Handle errors by updating the state
-      state = AsyncValue.error(e, stackTrace);
+      print('Error: $e');
     }
   }
 }
