@@ -32,7 +32,7 @@ Follow these steps to set up and run the project:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/ecommerce-app.git
+   git clone https://github.com/Binary-Brains-GP/ecommerce-app.git
    cd ecommerce-app
    ```
 
@@ -61,26 +61,7 @@ Follow these steps to set up and run the project:
 
 ---
 
-## 🤝 Contributing
-
-We welcome contributions! To contribute:
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature-name`).
-3. Commit changes (`git commit -m 'Added new feature'`).
-4. Push to your branch (`git push origin feature-name`).
-5. Open a Pull Request.
-
----
-
 ## 📜 License
 
 This project is licensed under the **MIT License**.
-
----
-
-## 📧 Contact
-
-For any inquiries or suggestions, feel free to reach out:
-📩 Email: your-email@example.com
-📌 GitHub: [yourusername](https://github.com/yourusername)
 
